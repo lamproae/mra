@@ -1,7 +1,7 @@
 package command
 
 type Command struct {
-	Requiredmode string
+	RequiredMode string
 	CMD          string
 	Result       string
 }

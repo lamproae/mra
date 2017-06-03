@@ -10,4 +10,5 @@ type Config struct {
 	LoginPrompt    string
 	PasswordPrompt string
 	Prompt         string
+	ModeDB         map[string]string
 }

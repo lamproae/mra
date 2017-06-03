@@ -19,6 +19,17 @@ func TestLogin(t *testing.T) {
 		LoginPrompt:    "login",
 		PasswordPrompt: "Password",
 		Prompt:         "#",
+		ModeDB: map[string]string{
+			"login":    "login",
+			"password": "Passowrd:",
+			"enable":   ">",
+			//	"normal":        "#",
+			"config":        "(config)",
+			"config-vlan":   "(config-vlan)",
+			"config-if":     "(config-if[",
+			"config-dhcp":   "(config-dhcp[",
+			"config-router": "(config-router)",
+		},
 	})
 
 	if err != nil {
@@ -44,6 +55,17 @@ func TestRunCommand(t *testing.T) {
 		LoginPrompt:    "login",
 		PasswordPrompt: "Password",
 		Prompt:         "#",
+		ModeDB: map[string]string{
+			"login":    "login",
+			"password": "Passowrd:",
+			"enable":   ">",
+			//	"normal":        "#",
+			"config":        "(config)",
+			"config-vlan":   "(config-vlan)",
+			"config-if":     "(config-if[",
+			"config-dhcp":   "(config-dhcp[",
+			"config-router": "(config-router)",
+		},
 	})
 
 	if err != nil {
@@ -57,9 +79,26 @@ func TestRunCommand(t *testing.T) {
 		return
 	}
 
-	c.RunCommand(&command.Command{
+	data, err := c.RunCommand(&command.Command{
+		RequiredMode: "normal",
+		CMD:          "configure terminal",
+	})
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(string(data))
+
+	data, err = c.RunCommand(&command.Command{
 		RequiredMode: "config",
 		CMD:          "show running-config",
-		Result:       "",
 	})
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println(string(data))
 }
