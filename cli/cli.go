@@ -2,6 +2,7 @@ package cli
 
 import (
 	"errors"
+	"fmt"
 	"github.com/lamproae/mra/command"
 	"github.com/lamproae/mra/config"
 	"github.com/lamproae/mra/telnet"
@@ -19,8 +20,8 @@ func (c *Cli) RunCommand(cmd *command.Command) (result []byte, err error) {
 		return nil, errors.New("Cannot run : " + cmd.CMD() + " under " + c.mode + " mode!")
 	}
 
-	c.WriteLine(cmd.CMD())
-	data, err = c.ReadUntil(c.conf.Prompt())
+	c.client.WriteLine(cmd.CMD())
+	data, err := c.client.ReadUntil(c.conf.Prompt)
 	if err != nil {
 		fmt.Println("Error happend when get login prompt: ", err.Error())
 		return nil, err
@@ -52,16 +53,16 @@ func (c *Cli) Init() error {
 		return err
 	}
 
-	c.WriteLine("enable")
-	data, err = c.ReadUntil(c.conf.Prompt)
+	c.client.WriteLine("enable")
+	data, err = c.client.ReadUntil(c.conf.Prompt)
 	if err != nil {
 		fmt.Println("Error happend when goto enable mode: ", err.Error())
 		return err
 	}
 	fmt.Println(string(data))
 
-	c.WriteLine("terminal length 0")
-	data, err = c.ReadUntil("#")
+	c.client.WriteLine("terminal length 0")
+	data, err = c.client.ReadUntil("#")
 	if err != nil {
 		fmt.Println("Error happend when SetTerminalLength: ", err.Error())
 		return err
@@ -73,21 +74,21 @@ func (c *Cli) Init() error {
 
 func (c *Cli) login() error {
 	c.client.SetUnixWriteMode(true)
-	data, err := c.ReadUntil(c.conf.LoginPrompt)
+	data, err := c.client.ReadUntil(c.conf.LoginPrompt)
 	if err != nil {
 		fmt.Println("Error happend when get login: ", err.Error())
 		return err
 	}
 	fmt.Println(string(data))
-	c.WriteLine(c.conf.UserName)
-	data, err = c.ReadUntil(c.conf.PasswordPrompt)
+	c.client.WriteLine(c.conf.UserName)
+	data, err = c.client.ReadUntil(c.conf.PasswordPrompt)
 	if err != nil {
 		fmt.Println("Error happend when get login prompt: ", err.Error())
 		return err
 	}
 	fmt.Println(string(data))
-	c.WriteLine(c.conf.Password)
-	data, err = c.ReadUntil(c.conf.EnablePrompt)
+	c.client.WriteLine(c.conf.Password)
+	data, err = c.client.ReadUntil(c.conf.EnablePrompt)
 	if err != nil {
 		fmt.Println("Error happend when login: ", err.Error())
 		return err
