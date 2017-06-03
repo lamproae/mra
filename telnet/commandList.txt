@@ -6095,7 +6095,7 @@
   show running-config router-id
   show running-config slowpath-filter
   show running-config snmp
-  show running-config syslog
+  show running-config syslog 
   show running-config system
   show running-config time-zone
   write memory
@@ -7256,7 +7256,7 @@
   show running-config router-id
   show running-config slowpath-filter
   show running-config snmp
-  show running-config syslog
+  show running-config syslog 
   show running-config system
   show running-config time-zone
   write memory
@@ -8362,7 +8362,7 @@
   show running-config community-list
   show running-config dhcp
   show running-config dhcp6
-  show running-config dns 
+  show running-config dns
   show running-config eonu-dba-profile
   show running-config eonu-profile
   show running-config epon
@@ -9849,7 +9849,7 @@
   show running-config router-id
   show running-config slowpath-filter
   show running-config snmp
-  show running-config syslog 
+  show running-config syslog
   show running-config system
   show running-config time-zone
   write memory
@@ -12530,7 +12530,7 @@
   show ipv6 prefix-list WORD X:X::X:X/M first-match
   show ipv6 prefix-list WORD X:X::X:X/M longer
   show ipv6 prefix-list WORD seq <1-4294967295>
-  show ipv6 prefix-list detail
+  show ipv6 prefix-list detail 
   show ipv6 prefix-list detail WORD
   show ipv6 prefix-list summary
   show ipv6 prefix-list summary WORD
@@ -13984,7 +13984,7 @@
   do LINE
   end
   exit
-  help 
+  help
   no priority key (|{onu-id|src-ip|dst-ip|src-mac|dst-mac|outer-vid|outer-cos|inner-vid|inner-cos|src-port|dst-port|dscp|ethtype|ip-proto|out-vport})
   no priority size
   no queue key (|{onu-id|src-ip|dst-ip|src-mac|dst-mac|outer-vid|outer-cos|inner-vid|inner-cos|src-port|dst-port|dscp|ethtype|ip-proto|out-vport})
@@ -16018,7 +16018,7 @@
   show running-config router-id
   show running-config slowpath-filter
   show running-config snmp
-  show running-config syslog
+  show running-config syslog 
   show running-config system
   show running-config time-zone
   write memory
