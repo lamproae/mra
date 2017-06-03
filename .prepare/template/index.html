@@ -1,0 +1,12 @@
+<html>
+	{{template "header" .}} 
+	<body>
+		<h1>index</h1>
+		{{range .Items}}
+			<div>{{.}}</div>
+		{{else}}
+			<div>no row</div>
+		{{end}}
+		{{template "footer"}}
+	</body>
+</html>
