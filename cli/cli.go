@@ -16,11 +16,11 @@ type Cli struct {
 }
 
 func (c *Cli) RunCommand(cmd *command.Command) (result []byte, err error) {
-	if cmd.RequiredMode() != c.mode {
-		return nil, errors.New("Cannot run : " + cmd.CMD() + " under " + c.mode + " mode!")
+	if cmd.RequiredMode != c.mode {
+		return nil, errors.New("Cannot run : " + cmd.CMD + " under " + c.mode + " mode!")
 	}
 
-	c.client.WriteLine(cmd.CMD())
+	c.client.WriteLine(cmd.CMD)
 	data, err := c.client.ReadUntil(c.conf.Prompt)
 	if err != nil {
 		fmt.Println("Error happend when get login prompt: ", err.Error())
