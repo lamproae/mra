@@ -1,12 +1,29 @@
 <html>
 	{{template "header" .}} 
 	<body>
-		<h1>index</h1>
-		{{range .Items}}
-			<div>{{.}}</div>
-		{{else}}
+		<div class="container">
+			{{range .Items}}
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Name</h2>
+					<p>Name has the value of : {{.}} </p>
+					<p><a class="btn btn-default" href="#" role="button">More &raquo;</a></p>
+				</div>
+				<div class="col-md-4">
+					<h2>Id</h2>
+					<p>Id has the value of : {{.}} </p>
+					<p><a class="btn btn-default" href="#" role="button">More &raquo;</a></p>
+				</div>
+				<div class="col-md-4">
+					<h2>Country</h2>
+					<p>Country has the value of : {{.}} </p>
+					<p><a class="btn btn-default" href="#" role="button">More &raquo;</a></p>
+				</div>
+			</div> 
+			{{else}}
 			<div>no row</div>
-		{{end}}
+			{{end}}
+		</div> 
 		{{template "footer"}}
 	</body>
 </html>
