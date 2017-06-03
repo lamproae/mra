@@ -1,20 +1,17 @@
-package telnet
-
-//package telnet_test
+package telnet_test
 
 import (
 	"fmt"
-	//"telnet"
+	"github.com/lamproae/mra/telnet"
+	"github.com/lamproae/mra/util"
 	"strings"
 	"testing"
-	"util"
 )
 
 var host = "10.71.20.198:23"
 
 func TestTelnetConnection(t *testing.T) {
-	c, err := NewClient(host)
-	//c, err := telnet.NewClient(host)
+	c, err := telnet.NewClient(host)
 	if err != nil {
 		fmt.Println("Error happend when connect to DUT: ", err.Error())
 	}
@@ -28,8 +25,7 @@ func TestTelnetConnection(t *testing.T) {
 }
 
 func TestLoginFunction(t *testing.T) {
-	c, err := NewClient("10.71.20.198:23")
-	//c, err := telnet.NewClient("10.71.20.198:23")
+	c, err := telnet.NewClient("10.71.20.198:23")
 	if err != nil {
 		fmt.Println("Error happend when connect to DUT: ", err.Error())
 	}
@@ -80,8 +76,7 @@ func TestLoginFunction(t *testing.T) {
 }
 
 func TestShowAll(t *testing.T) {
-	c, err := NewClient("10.71.20.198:23")
-	//c, err := telnet.NewClient("10.71.20.198:23")
+	c, err := telnet.NewClient("10.71.20.198:23")
 	if err != nil {
 		fmt.Println("Error happend when connect to DUT: ", err.Error())
 	}
