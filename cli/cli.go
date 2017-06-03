@@ -54,7 +54,7 @@ func (c *Cli) Init() error {
 	}
 
 	c.client.WriteLine("enable")
-	data, err = c.client.ReadUntil(c.conf.Prompt)
+	data, err := c.client.ReadUntil(c.conf.Prompt)
 	if err != nil {
 		fmt.Println("Error happend when goto enable mode: ", err.Error())
 		return err
