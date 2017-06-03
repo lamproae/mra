@@ -1,9 +1,9 @@
 package cli_test
 
 import (
-	"cli"
-	"config"
 	"fmt"
+	"github.com/lamproae/mra/cli"
+	"github.com/lamproae/mra/config"
 	"testing"
 )
 

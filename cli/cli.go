@@ -1,11 +1,11 @@
 package cli
 
 import (
-	"command"
-	"config"
 	"errors"
+	"github.com/lamproae/mra/command"
+	"github.com/lamproae/mra/config"
+	"github.com/lamproae/mra/telnet"
 	"log"
-	"telnet"
 )
 
 type Cli struct {
