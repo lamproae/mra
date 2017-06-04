@@ -1,0 +1,446 @@
+<html>
+	{{template "header" .}} 
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<form class="form-horizontal" role="form">
+						<fieldset>
+
+							<!-- Form Name -->
+							<legend>Address Details</legend>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Line 1</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="Address Line 1" class="form-control">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Line 2</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="Address Line 2" class="form-control">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">City</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="City" class="form-control">
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">State</label>
+								<div class="col-sm-4">
+									<input type="text" placeholder="State" class="form-control">
+								</div>
+
+								<label class="col-sm-2 control-label" for="textinput">Postcode</label>
+								<div class="col-sm-4">
+									<input type="text" placeholder="Post Code" class="form-control">
+								</div>
+							</div>
+
+
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="textinput">Country</label>
+								<div class="col-sm-10">
+									<input type="text" placeholder="Country" class="form-control">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-default">Cancel</button>
+										<button type="submit" class="btn btn-primary">Save</button>
+									</div>
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+				</div><!-- /.col-lg-12 -->
+			</div><!-- /.row -->
+		</div>
+		<!-- -->
+		<div class="container">
+			<div class="row">
+				<div class='panel panel-default'>
+					<div class='panel-heading'>Education</div>
+					<div class='panel-body'>
+						<div class='team-list'>
+							<div class='team-details'>												
+								<div class='individual-fields'>
+									<label for="graduation" class="col-sm-3 control-label">Graduation <span class="required-mark">*</span></label>
+									<div class="col-sm-9">
+										<div class="row no-pad">
+											<div class='form-group col-sm-11'>
+												<select class="form-control input-lg" name="graduation">
+													<option value="">-- Select  --</option>
+													<option>Under Graduate</option>
+													<option>Graduate</option>
+													<option>Post Graduate</option>
+													<option>Doctorate </option>
+
+												</select>
+											</div>
+											<div class=' col-sm-1 close-div-button  close-added-div hidden-div'>
+												<a class='delete' title='Delete'><i class="fa fa-trash-o"></i></a>
+											</div>														           
+										</div>      
+									</div>	
+									<div style="clear:both;"></div>
+								</div>
+
+								<div class="form-group">
+									<label for="specialisation" class="col-sm-3 control-label">Specialisation <span class="required-mark">*</span></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control input-lg" id="" placeholder="" name="specialisation">       
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="skillimplement" class="col-sm-3 control-label">University </label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control input-lg" id="" placeholder="" name="skillimplement">       
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label">Year of passing</label>
+									<div class="col-sm-8">
+										<select class="form-control input-lg" id="" name="repeatTraining">
+											<option>-- Select --</option>
+											<option>1988</option>
+											<option>1989</option>
+											<option>1990</option>
+
+										</select>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class='btn add-more teams col-sm-offset-5'><a><span>+</span>Add More Education </a></div>	
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- -->
+		<div class="container">
+			<div class="row">
+				<input type="hidden" name="count" value="1" />
+				<div class="control-group" id="fields">
+					<label class="control-label" for="field1">Nice Multiple Form Fields</label>
+					<div class="controls" id="profs"> 
+						<div class="input-append">
+							<input autocomplete="off" class="span3" id="field1" name="prof1" type="text" placeholder="Type something (it has typeahead too)" data-provide="typeahead" data-items="8" data-source='["Aardvark","Beatlejuice","Capricorn","Deathmaul","Epic"]'/><button id="b1" class="btn btn-info add-more" type="button">+</button>
+						</div>
+						<br>
+						<small>Press + to add another form field :)</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<br>
+			<button id="add">Add Another Item</button>
+			<button id="remove">Remove a table</button>
+			<br><br>
+			<div id="div1">
+				<table id="table">
+					<tr>
+						<td>Item</td><td><input class="form-control" type="text" id="item" placeholder="items"></td>
+						<td>type</td><td><input class="form-control" type="text" id="type" placeholder="type"></td>
+						<td>Quantity</td><td><input class="form-control" type="text" id="qty" placeholder="quantity"></td>
+					</tr>
+					<tr>
+						<td>Store</td><td><input class="form-control" type="text" id="item" placeholder="store"></td>
+						<td>Description</td><td><input class="form-control" type="text" id="type" placeholder="desciption"></td>
+						<td>Price</td><td><input class="form-control" type="text" id="qty" placeholder="Price"></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<table class="table table-bordered table-hover" id="tab_logic">
+						<thead>
+							<tr >
+								<th class="text-center">
+									Image Preivew
+								</th>
+								<th class="text-center">
+									Type of Emotion 
+								</th>
+								<th class="text-center">
+									Source
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id='addr0'>
+								<td align = "center">
+									<img src = "http://www.placehold.it/200x200" alt= "..."></img>
+								</td>
+								<td>
+									<input type="text" name='emotion0' placeholder='emotion' class="form-control"/>
+								</td>
+								<td>
+									<input type="text" name='source0' placeholder='source' class="form-control"/>
+								</td>
+							</tr>
+							<tr id='addr1'></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<a id="add_row" class="pull-left">Add Row</a><a id='delete_row' class="pull-right">Delete Row</a>
+		</div>
+
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<table class="table table-bordered table-hover" id="tab_logic">
+						<thead>
+							<tr >
+								<th class="text-center">
+									#
+								</th>
+								<th class="text-center">
+									Name
+								</th>
+								<th class="text-center">
+									Mail
+								</th>
+								<th class="text-center">
+									Mobile
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id='addr0'>
+								<td>
+									1
+								</td>
+								<td>
+									<input type="text" name='name0'  placeholder='Name' class="form-control"/>
+								</td>
+								<td>
+									<input type="text" name='mail0' placeholder='Mail' class="form-control"/>
+								</td>
+								<td>
+									<input type="text" name='mobile0' placeholder='Mobile' class="form-control"/>
+								</td>
+							</tr>
+							<tr id='addr1'></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<a id="add_row1" class="pull-left">Add Row</a><a id='delete_row1' class="pull-right">Delete Row</a>
+		</div>
+		<div class="container">
+			<form action="registernewcase" method="post">
+				<p>Name: <input type="text" name="Name" /></p>
+				<p>Description name: <input type="textarea" name="Description" /></p>
+				<input type="submit" value="Submit" />
+			</form>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
+			<div class="panel-heading">Education Experience</div>
+			<div class="panel-body">
+
+				<div id="education_fields">
+
+				</div>
+				<div class="col-sm-3 nopadding">
+					<div class="form-group">
+						<input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name">
+					</div>
+				</div>
+				<div class="col-sm-3 nopadding">
+					<div class="form-group">
+						<input type="text" class="form-control" id="Major" name="Major[]" value="" placeholder="Major">
+					</div>
+				</div>
+				<div class="col-sm-3 nopadding">
+					<div class="form-group">
+						<input type="text" class="form-control" id="Degree" name="Degree[]" value="" placeholder="Degree">
+					</div>
+				</div>
+
+				<div class="col-sm-3 nopadding">
+					<div class="form-group">
+						<div class="input-group">
+							<select class="form-control" id="educationDate" name="educationDate[]">
+
+								<option value="">Date</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+								<option value="2017">2017</option>
+								<option value="2018">2018</option>
+							</select>
+							<div class="input-group-btn">
+								<button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+
+			</div>
+			<div class="panel-footer"><small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>, <small>Press <span class="glyphicon glyphicon-minus gs"></span> to remove form field :)</small></div>
+			<div class="panel-footer"><small><em><a href="http://shafi.info/">More Info - Developer Shafi (Bangladesh)</a></em></small></div>
+		</div>
+		<div class="container">
+			<form class="form-horizontal" role="form">
+				<fieldset>
+					<legend>配置数据源</legend>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="ds_host">主机名</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="ds_host" type="text" placeholder="192.168.1.161"/>
+						</div>
+						<label class="col-sm-2 control-label" for="ds_name">数据库名</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="ds_name" type="text" placeholder="msh"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="ds_username">用户名</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="ds_username" type="text" placeholder="root"/>
+						</div>
+						<label class="col-sm-2 control-label" for="ds_password">密码</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="ds_password" type="password" placeholder="123456"/>
+						</div>
+					</div>
+				</fieldset>     
+				<fieldset>
+					<legend>选择相关表</legend>
+					<div class="form-group">
+						<label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+						<div class="col-sm-10">
+							<select id="disabledSelect" class="form-control">
+								<option>禁止选择</option>
+								<option>禁止选择</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>字段名</legend>
+					<div class="form-group">
+						<label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+						<div class="col-sm-10">
+							<select id="disabledSelect" class="form-control">
+								<option>禁止选择</option>
+								<option>禁止选择</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>Description</legend>
+					<div class="form-group">
+							<label for="case_description" class="col-sm-2 control-label">Test case description</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5"></textarea>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<button type="submit" class="btn btn-default col-sm-10">提交</button>
+			</form>
+		</div>
+		<script type="text/javascript">
+var next = 1;
+$(".add-more").click(function(e){
+	e.preventDefault();
+	var addto = "#field" + next;
+	next = next + 1;
+	var newIn = '<br /><br /><input autocomplete="off" class="span3" id="field' + next + '" name="field' + next + '" type="text" data-provide="typeahead" data-items="8">';
+	var newInput = $(newIn);
+	$(addto).after(newInput);
+	$("#field" + next).attr('data-source',$(addto).attr('data-source'));
+	$("#count").val(next);  
+});
+
+$("#remove").click(function(){
+	$("#table").remove();
+});
+
+$("#add").click(function(){
+	$("#table").clone().appendTo("#div1");
+});
+
+var i=1;
+$("#add_row").click(function(){
+	$('#addr'+i).html("<td align = 'center'><img src = 'http://www.placehold.it/200x200' alt = '...'></img></td><td><input name='emotion"+i+"' type='text' placeholder='Emotion' class='form-control input-md'/> </td><td><input  name='source"+i+"' type='text' placeholder='Source'  class='form-control input-md'></td>");
+
+	$('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+	i++; 
+});
+
+$("#delete_row").click(function(){
+	if(i>1){
+		$("#addr"+(i-1)).html('');
+		i--;
+	}
+});
+
+var i=1;
+$("#add_row1").click(function(){
+	$('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='Name' class='form-control input-md'  /> </td><td><input  name='mail"+i+"' type='text' placeholder='Mail'  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder='Mobile'  class='form-control input-md'></td>");
+
+	$('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+	i++; 
+});
+$("#delete_row1").click(function(){
+	if(i>1){
+		$("#addr"+(i-1)).html('');
+		i--;
+	}
+});
+
+var room = 1;
+function education_fields() {
+
+	room++;
+	var objTo = document.getElementById('education_fields')
+	var divtest = document.createElement("div");
+	divtest.setAttribute("class", "form-group removeclass"+room);
+	var rdiv = 'removeclass'+room;
+	divtest.innerHTML = '<div class="col-sm-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Major" name="Major[]" value="" placeholder="Major"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Degree" name="Degree[]" value="" placeholder="Degree"></div></div><div class="col-sm-3 nopadding"><div class="form-group"><div class="input-group"> <select class="form-control" id="educationDate" name="educationDate[]"><option value="">Date</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option> </select><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button></div></div></div></div><div class="clear"></div>';
+
+	objTo.appendChild(divtest)
+}
+function remove_education_fields(rid) {
+	$('.removeclass'+rid).remove();
+}
+		</script>
+		<!--
+	  <script type="text/javascript" src="static/js/registernewcase.js"></script>
+	  -->
+	  <link rel="stylesheet" href="static/css/registernewcase.css">
+	  {{template "footer"}}
+	</body>
+</html>
