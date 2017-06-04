@@ -1,65 +1,61 @@
-<html>
-	{{template "header" .}} 
-	<body>
-		<div class="container">
-			<form class="form-horizontal" role="form" action="registernewcase" method="post">
-				<!--<form class="form-horizontal" role="form" action="registernewcase" method="POST">-->
-				<fieldset>
-					<legend>配置数据源</legend>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="ds_host">主机名</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="ds_host" name="ds_host" type="text" placeholder="192.168.1.161"/>
-						</div>
-						<label class="col-sm-2 control-label" for="ds_name">数据库名</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="ds_name" name="ds_name" type="text" placeholder="msh"/>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="ds_username">用户名</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="ds_username" name="ds_username" type="text" placeholder="root"/>
-						</div>
-						<label class="col-sm-2 control-label" for="ds_password">密码</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="ds_password" name="ds_password" type="password" placeholder="123456"/>
-						</div>
-					</div>
-				</fieldset>     
-				<fieldset>
-					<legend>选择相关表</legend>
-					<div class="form-group">
-						<label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
-						<div class="col-sm-10">
-							<select id="disabledSelect" name="disabledSelect" class="form-control">
-								<option>禁止选择</option>
-								<option>禁止选择</option>
-							</select>
-						</div>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend>Description</legend>
-					<div class="form-group">
-						<label for="case_description" class="col-sm-2 control-label">Test case description</label>
-						<div class="col-sm-10">
-							<textarea id="case_description" name="case_description" class="form-control" rows="5"></textarea>
-						</div>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend></legend>
-						<div class="col-sm-4">
-						</div>
-						<div class="col-sm-6">
-							<button type="submit" name="submit" class="btn  btn-block center-block">提交</button>
-						</div>
-				</fieldset>
-				</form>
-		</div>
-		<script type="text/javascript" src="static/js/registernewcase.js"></script>
-		<link rel="stylesheet" href="static/css/registernewcase.css">
-		{{template "footer"}}
-	</body>
-</html>
+{{template "header" .}} 
+<div class="container">
+	<form class="form-horizontal" role="form" action="registernewcase" method="post">
+		<!--<form class="form-horizontal" role="form" action="registernewcase" method="POST">-->
+		<fieldset>
+			<legend>配置数据源</legend>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="ds_host">主机名</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="ds_host" name="ds_host" type="text" placeholder="192.168.1.161"/>
+				</div>
+				<label class="col-sm-2 control-label" for="ds_name">数据库名</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="ds_name" name="ds_name" type="text" placeholder="msh"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="ds_username">用户名</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="ds_username" name="ds_username" type="text" placeholder="root"/>
+				</div>
+				<label class="col-sm-2 control-label" for="ds_password">密码</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="ds_password" name="ds_password" type="password" placeholder="123456"/>
+				</div>
+			</div>
+		</fieldset>     
+		<fieldset>
+			<legend>选择相关表</legend>
+			<div class="form-group">
+				<label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+				<div class="col-sm-10">
+					<select id="disabledSelect" name="disabledSelect" class="form-control">
+						<option>禁止选择</option>
+						<option>禁止选择</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Description</legend>
+			<div class="form-group">
+				<label for="case_description" class="col-sm-2 control-label">Test case description</label>
+				<div class="col-sm-10">
+					<textarea id="case_description" name="case_description" class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend></legend>
+			<div class="col-sm-4">
+			</div>
+			<div class="col-sm-6">
+				<button type="submit" name="submit" class="btn  btn-block center-block">提交</button>
+			</div>
+		</fieldset>
+		</form>
+</div>
+<script type="text/javascript" src="static/js/registernewcase.js"></script>
+<link rel="stylesheet" href="static/css/registernewcase.css">
+{{template "footer"}}

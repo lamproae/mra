@@ -179,7 +179,7 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		//@liwei: This is a very stuiped method. We need just return the opertion status to user.
-		t, err := template.ParseFiles("template/newtask.html", "template/footer.html", "template/header.html")
+		t, err := template.ParseFiles("template/newtask.html", "template/footer.html", "template/header.html", "template/routine.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())

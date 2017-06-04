@@ -1,104 +1,51 @@
-<html>
-	{{template "header" .}} 
-	<body>
-		<div class="container">
-			<form class="form-horizontal" role="form" action="newtask" method="post">
-				<fieldset>
-					<legend>Task{{.ID}}</legend>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="case_name">Name</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
-						</div>
+{{template "header" .}} 
+<div class="container">
+	<form class="form-horizontal" role="form" action="newtask" method="post">
+		<fieldset>
+			<legend>Task{{.ID}}</legend>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="case_name">Name</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="case_name">Pre Condition</label>
+				<div class="col-sm-4">
+					{{template "routine"}}
+					<div>
+						<a id="add_dut" class="pull-left">Add Pre-Condtion</a><a id='del_dut' class="pull-right">Del Pre-Condition</a>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="case_name">Pre Condition</label>
-						<div class="col-sm-4">
-							<table class="table table-bordered table-hover" id="precondition_tab">
-								<thead>
-									<tr>
-										<th class="text-center">#</th>
-										<th class="text-center">Name</th>
-										<th class="text-center">Device</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr id='row0'>
-										<td>1</td>
-										<td><input type="text" name='dut0'  placeholder='DUT0' class="form-control"/></td>
-										<td><input type="text" name='device0' placeholder='V8500_SFU' class="form-control"/></td>
-									</tr>
-									<tr id='row1'></tr>
-								</tbody>
-							</table>
-							<div>
-								<a id="add_dut" class="pull-left">Add Pre-Condtion</a><a id='del_dut' class="pull-right">Del Pre-Condition</a>
-							</div>
-						</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="case_name">Routines</label>
+				<div class="col-sm-4">
+					{{template "routine"}}
+					<div>
+						<a id="add_dut" class="pull-left">Add Routine</a><a id='del_dut' class="pull-right">Del Routine</a>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="case_name">Routines</label>
-						<div class="col-sm-4">
-							<table class="table table-bordered table-hover" id="routine_tab">
-								<thead>
-									<tr>
-										<th class="text-center">#</th>
-										<th class="text-center">Name</th>
-										<th class="text-center">Device</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr id='row0'>
-										<td>1</td>
-										<td><input type="text" name='dut0'  placeholder='DUT0' class="form-control"/></td>
-										<td><input type="text" name='device0' placeholder='V8500_SFU' class="form-control"/></td>
-									</tr>
-									<tr id='row1'></tr>
-								</tbody>
-							</table>
-							<div>
-								<a id="add_dut" class="pull-left">Add Routine</a><a id='del_dut' class="pull-right">Del Routine</a>
-							</div>
-						</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="case_name">Post Condition</label>
+				<div class="col-sm-4">
+					{{template "routine"}}
+					<div>
+						<a id="add_dut" class="pull-left">Add Post-Condition</a><a id='del_dut' class="pull-right">Del Post-Condition</a>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="case_name">Post Condition</label>
-						<div class="col-sm-4">
-							<table class="table table-bordered table-hover" id="postcondition_tab">
-								<thead>
-									<tr>
-										<th class="text-center">#</th>
-										<th class="text-center">Name</th>
-										<th class="text-center">Device</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr id='row0'>
-										<td>1</td>
-										<td><input type="text" name='dut0'  placeholder='DUT0' class="form-control"/></td>
-										<td><input type="text" name='device0' placeholder='V8500_SFU' class="form-control"/></td>
-									</tr>
-									<tr id='row1'></tr>
-								</tbody>
-							</table>
-							<div>
-								<a id="add_dut" class="pull-left">Add Post-Condition</a><a id='del_dut' class="pull-right">Del Post-Condition</a>
-							</div>
-						</div>
-					</div>
+				</div>
+			</div>
 
-				</fieldset>     
-				<fieldset>
-					<legend></legend>
-					<div class="col-sm-2"></div>
-					<div class="col-sm-4">
-						<button type="submit" name="submit" class="btn btn-block">Submit</button>
-					</div>
-				</fieldset>
-			</form>
-		</div>
-		<script type="text/javascript" src="static/js/newcase.js"></script>
-		<link rel="stylesheet" href="static/css/newcase.css">
-		{{template "footer"}}
-	</body>
-</html>
+		</fieldset>     
+		<fieldset>
+			<legend></legend>
+			<div class="col-sm-2"></div>
+			<div class="col-sm-4">
+				<button type="submit" name="submit" class="btn btn-block">Submit</button>
+			</div>
+		</fieldset>
+	</form>
+</div>
+<script type="text/javascript" src="static/js/newtask.js"></script>
+{{template "footer"}}

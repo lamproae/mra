@@ -1,53 +1,49 @@
-<html>
-	{{template "header" .}} 
-	<body>
-		<div class="container">
-			<form class="form-horizontal" role="form" action="registernewcase" method="post">
-				<!--<form class="form-horizontal" role="form" action="registernewcase" method="POST">-->
-				<fieldset>
-					<legend>Case Parameters</legend>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="case_name">Name</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
-						</div>
-						<label class="col-sm-2 control-label" for="group">Group</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="group" name="group" type="text" placeholder="OSPF"/>
-						</div>
-						<label class="col-sm-2 control-label" for="subgroup">Sub Group</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="subgroup" name="subgroup" type="text" placeholder="OSPF"/>
-						</div>
-					</div>
-				</fieldset>     
-				<fieldset>
-					<div id="tasks">
-					<legend>Tasks</legend> <a id="addtask" class="pull-left">Add Task</a><a id='deltask' class="pull-right">Del Task</a>
-					{{template "task"}}
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend>Description</legend>
-					<div class="form-group">
-						<label for="case_description" class="col-sm-2 control-label">Test case description</label>
-						<div class="col-sm-10">
-							<textarea id="case_description" name="case_description" class="form-control" rows="5"></textarea>
-						</div>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend></legend>
-					<div class="col-sm-4">
-					</div>
-					<div class="col-sm-6 pull-right">
-						<button type="submit" name="submit" class="btn  btn-block center-block">提交</button>
-					</div>
-				</fieldset>
-				</form>
-					</div>
-					<script type="text/javascript" src="static/js/registernewcase.js"></script>
-					<link rel="stylesheet" href="static/css/registernewcase.css">
-					{{template "footer"}}
-	</body>
-</html>
+{{template "header" .}} 
+<div class="container">
+	<form class="form-horizontal" role="form" action="registernewcase" method="post">
+		<!--<form class="form-horizontal" role="form" action="registernewcase" method="POST">-->
+		<fieldset>
+			<legend>Case Parameters</legend>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="case_name">Name</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
+				</div>
+				<label class="col-sm-2 control-label" for="group">Group</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="group" name="group" type="text" placeholder="OSPF"/>
+				</div>
+				<label class="col-sm-2 control-label" for="subgroup">Sub Group</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="subgroup" name="subgroup" type="text" placeholder="OSPF"/>
+				</div>
+			</div>
+		</fieldset>     
+		<fieldset>
+			<div id="tasks">
+				<legend>Tasks</legend> <a id="addtask" class="pull-left">Add Task</a><a id='deltask' class="pull-right">Del Task</a>
+				{{template "task"}}
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Description</legend>
+			<div class="form-group">
+				<label for="case_description" class="col-sm-2 control-label">Test case description</label>
+				<div class="col-sm-10">
+					<textarea id="case_description" name="case_description" class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend></legend>
+			<div class="col-sm-4">
+			</div>
+			<div class="col-sm-6 pull-right">
+				<button type="submit" name="submit" class="btn  btn-block center-block">提交</button>
+			</div>
+		</fieldset>
+		</form>
+</div>
+<script type="text/javascript" src="static/js/registernewcase.js"></script>
+<link rel="stylesheet" href="static/css/registernewcase.css">
+{{template "footer"}}

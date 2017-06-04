@@ -1,168 +1,164 @@
-<html>
-	{{template "header" .}} 
-	<body>
-		<div class="container">
-			<form class="form-horizontal" role="form" action="registernewcase" method="post">
-				<!--<form class="form-horizontal" role="form" action="registernewcase" method="POST">-->
-				<fieldset>
-					<legend>Case Parameters</legend>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="case_name">Name</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
+{{template "header" .}} 
+<div class="container">
+	<form class="form-horizontal" role="form" action="registernewcase" method="post">
+		<!--<form class="form-horizontal" role="form" action="registernewcase" method="POST">-->
+		<fieldset>
+			<legend>Case Parameters</legend>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="case_name">Name</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
+				</div>
+				<label class="col-sm-2 control-label" for="group">Group</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="group" name="group" type="text" placeholder="OSPF"/>
+				</div>
+				<label class="col-sm-2 control-label" for="subgroup">Sub Group</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="subgroup" name="subgroup" type="text" placeholder="OSPF"/>
+				</div>
+			</div>
+		</fieldset>     
+		<fieldset>
+			<legend>Tasks</legend>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="task_name">Name</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="task_name" name="task_name" type="text" placeholder="OSPF Enable/Disable"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-md-offset-2" >
+					<fieldset>
+						<legend>Routine</legend>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="textinput">Name</label>
+							<div class="col-md-4 col-md-offset-2" >
+								<input class="form-control" id="group" name="group" type="text" placeholder="create vlan"/>
+							</div>
 						</div>
-						<label class="col-sm-2 control-label" for="group">Group</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="group" name="group" type="text" placeholder="OSPF"/>
-						</div>
-						<label class="col-sm-2 control-label" for="subgroup">Sub Group</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="subgroup" name="subgroup" type="text" placeholder="OSPF"/>
-						</div>
-					</div>
-				</fieldset>     
-				<fieldset>
-					<legend>Tasks</legend>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="task_name">Name</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="task_name" name="task_name" type="text" placeholder="OSPF Enable/Disable"/>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-md-offset-2" >
-							<fieldset>
-								<legend>Routine</legend>
-								<div class="form-group">
-									<label class="col-sm-2 control-label" for="textinput">Name</label>
-									<div class="col-md-4 col-md-offset-2" >
-										<input class="form-control" id="group" name="group" type="text" placeholder="create vlan"/>
+						<div class="form-group">
+							<label for="routine_description" class="col-sm-2 control-label">Command</label>
+							<div class="container">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<table class="table table-bordered table-hover" id="command_tab">
+											<thead>
+												<tr >
+													<th class="text-center">
+														#
+													</th>
+													<th class="text-center">
+														Mode
+													</th>
+													<th class="text-center">
+														CLI
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr id='command0'>
+													<td>
+														1
+													</td>
+													<td>
+														<input type="text" name='mode0'  placeholder='enable' class="form-control"/>
+													</td>
+													<td>
+														<input type="text" name='cli' placeholder='show runngin-config' class="form-control"/>
+													</td>
+												</tr>
+												<tr id='command1'></tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="routine_description" class="col-sm-2 control-label">Command</label>
-									<div class="container">
-										<div class="row clearfix">
-											<div class="col-md-12 column">
-												<table class="table table-bordered table-hover" id="command_tab">
-													<thead>
-														<tr >
-															<th class="text-center">
-																#
-															</th>
-															<th class="text-center">
-																Mode
-															</th>
-															<th class="text-center">
-																CLI
-															</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr id='command0'>
-															<td>
-																1
-															</td>
-															<td>
-																<input type="text" name='mode0'  placeholder='enable' class="form-control"/>
-															</td>
-															<td>
-																<input type="text" name='cli' placeholder='show runngin-config' class="form-control"/>
-															</td>
-														</tr>
-														<tr id='command1'></tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<a id="add_command" class="pull-left">Add Commnad</a><a id='delete_command' class="pull-right">Delete Command</a>
+								<a id="add_command" class="pull-left">Add Commnad</a><a id='delete_command' class="pull-right">Delete Command</a>
+							</div>
+						</div><!-- from group-->
+						<div class="form-group">
+							<label for="routine_description" class="col-sm-2 control-label">Assertion</label>
+							<div class="container">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<table class="table table-bordered table-hover" id="assertion_tab">
+											<thead>
+												<tr >
+													<th class="text-center">
+														#
+													</th>
+													<th class="text-center">
+														Mode
+													</th>
+													<th class="text-center">
+														CLI
+													</th>
+													<th class="text-center">
+														Expected
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr id='assert0'>
+													<td>
+														1
+													</td>
+													<td>
+														<input type="text" name='mode0'  placeholder='enable' class="form-control"/>
+													</td>
+													<td>
+														<input type="text" name='cli0' placeholder='show runngin-config' class="form-control"/>
+													</td>
+													<td>
+														<input type="text" name='expected0' placeholder='br1000[[:space:]]+up' class="form-control"/>
+													</td>
+												</tr>
+												<tr id='assert1'></tr>
+											</tbody>
+										</table>
 									</div>
-								</div><!-- from group-->
-								<div class="form-group">
-									<label for="routine_description" class="col-sm-2 control-label">Assertion</label>
-									<div class="container">
-										<div class="row clearfix">
-											<div class="col-md-12 column">
-												<table class="table table-bordered table-hover" id="assertion_tab">
-													<thead>
-														<tr >
-															<th class="text-center">
-																#
-															</th>
-															<th class="text-center">
-																Mode
-															</th>
-															<th class="text-center">
-																CLI
-															</th>
-															<th class="text-center">
-																Expected
-															</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr id='assert0'>
-															<td>
-																1
-															</td>
-															<td>
-																<input type="text" name='mode0'  placeholder='enable' class="form-control"/>
-															</td>
-															<td>
-																<input type="text" name='cli0' placeholder='show runngin-config' class="form-control"/>
-															</td>
-															<td>
-																<input type="text" name='expected0' placeholder='br1000[[:space:]]+up' class="form-control"/>
-															</td>
-														</tr>
-														<tr id='assert1'></tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										<a id="add_assertion" class="pull-left">Add Assertion</a><a id='delete_assertion' class="pull-right">Delete Assertion</a>
-									</div>
-									<div class="form-group">
-										<label for="routine_description" class="col-sm-2 control-label">Description</label>
-										<div class="col-md-4 col-md-offset-2" >
-											<textarea id="routine_description" name="routine_description" class="form-control" rows="5"></textarea>
-										</div>
-									</div>
+								</div>
+								<a id="add_assertion" class="pull-left">Add Assertion</a><a id='delete_assertion' class="pull-right">Delete Assertion</a>
+							</div>
+							<div class="form-group">
+								<label for="routine_description" class="col-sm-2 control-label">Description</label>
+								<div class="col-md-4 col-md-offset-2" >
+									<textarea id="routine_description" name="routine_description" class="form-control" rows="5"></textarea>
+								</div>
+							</div>
 
-							</fieldset>
-								</div><!-- /.col-lg-12 -->
-						</div><!-- /.row -->
+					</fieldset>
+						</div><!-- /.col-lg-12 -->
+				</div><!-- /.row -->
 
-						<!--
-		  <div class="form-group">
-		  <label class="col-sm-2 control-label" for="routine_name">Name</label>
-		  <div class="col-sm-4">
-		  <input class="form-control" id="routine_name" name="routine_name" type="text" placeholder="Create OSPF interface"/>
-		  </div>
-		  </div>
-						-->
-				</fieldset>
-				<fieldset>
-					<legend>Description</legend>
-					<div class="form-group">
-						<label for="case_description" class="col-sm-2 control-label">Test case description</label>
-						<div class="col-sm-10">
-							<textarea id="case_description" name="case_description" class="form-control" rows="5"></textarea>
-						</div>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend></legend>
-					<div class="col-sm-4">
-					</div>
-					<div class="col-sm-6 pull-right">
-						<button type="submit" name="submit" class="btn  btn-block center-block">提交</button>
-					</div>
-				</fieldset>
-				</form>
-					</div>
-					<script type="text/javascript" src="static/js/registernewcase.js"></script>
-					<link rel="stylesheet" href="static/css/registernewcase.css">
-					{{template "footer"}}
-	</body>
-</html>
+				<!--
+		<div class="form-group">
+		<label class="col-sm-2 control-label" for="routine_name">Name</label>
+		<div class="col-sm-4">
+		<input class="form-control" id="routine_name" name="routine_name" type="text" placeholder="Create OSPF interface"/>
+		</div>
+		</div>
+				-->
+		</fieldset>
+		<fieldset>
+			<legend>Description</legend>
+			<div class="form-group">
+				<label for="case_description" class="col-sm-2 control-label">Test case description</label>
+				<div class="col-sm-10">
+					<textarea id="case_description" name="case_description" class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend></legend>
+			<div class="col-sm-4">
+			</div>
+			<div class="col-sm-6 pull-right">
+				<button type="submit" name="submit" class="btn  btn-block center-block">提交</button>
+			</div>
+		</fieldset>
+		</form>
+			</div>
+			<script type="text/javascript" src="static/js/registernewcase.js"></script>
+			<link rel="stylesheet" href="static/css/registernewcase.css">
+			{{template "footer"}}
