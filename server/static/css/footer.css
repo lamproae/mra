@@ -1,13 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Fjalla+One);
 @import url(http://fonts.googleapis.com/css?family=Gudea);
 .footer {
-	background: #fff url("../images/footer/footer-bg.png") repeat scroll left top;
+	background-color: #15224f;
 	border-top-style: solid;
 	border-top-color: #003;*
 }
 
 .title-widget {
-	color: #898989;
+	background-color: #15224f;
 	font-size: 20px;
 	font-weight: 300;
 	line-height: 1;
@@ -32,12 +32,13 @@
 }
 
 .widget_nav_menu ul {
+	background-color: #15224f;
 	list-style: outside none none;
 	padding-left: 0;
 }
 
 .widget_archive ul li {
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: #15224f;
 	content: "";
 	height: 3px;
 	left: 0;
@@ -57,10 +58,11 @@
 	margin-bottom: 7px;
 	padding-bottom: 7px;
 	width:95%;
+	background-color: #15224f;
 }
 
 .title-median {
-	color: #636363;
+	background-color: #15224f;
 	font-size: 20px;
 	line-height: 20px;
 	margin: 0 0 15px;
