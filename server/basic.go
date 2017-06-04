@@ -33,7 +33,10 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/inputtest", Description: "This is a page for test html form."},
 			{Link: "/registernewcase", Description: "Register a new ATS case."},
 			{Link: "/index", Description: "This is also the main page."},
+			{Link: "/pagefooter", Description: "This is also the main page."},
 			{Link: "/formsubmit", Description: "This is a page for form submit example."},
+			{Link: "/modularcase", Description: "Try to make the test case create page more flexibale."},
+			{Link: "/newcase", Description: "Re-Design the case create function."},
 		},
 	}
 
@@ -78,6 +81,87 @@ func RegisterNewCase(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
 		t, err := template.ParseFiles("template/registernewcase.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func PageFoorter(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/page.html", "template/footer.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func ModularCase(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/modularcase.html", "template/footer.html", "template/header.html", "template/task.html", "template/routine.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func NewCase(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/newcase.html", "template/footer.html", "template/header.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -172,6 +256,9 @@ func main() {
 	http.HandleFunc("/bootstrap", BootStrap)
 	http.HandleFunc("/inputtest", InputTest)
 	http.HandleFunc("/formsubmit", FormSubmit)
+	http.HandleFunc("/modularcase", ModularCase)
+	http.HandleFunc("/newcase", NewCase)
+	http.HandleFunc("/pagefooter", PageFoorter)
 	http.HandleFunc("/registernewcase", RegisterNewCase)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)

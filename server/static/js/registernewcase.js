@@ -47,3 +47,22 @@ $("#delete_command").click(function(){
 	}
 });
 
+var task=1;
+
+$("#deltask").click(function(){
+		$("#deltask").remove();
+});
+
+$("#addtask").click(function(){
+	$("#task0").clone().appendTo("#tasks");
+});
+
+var routine=1;
+
+$("#delroutine").click(function(){
+		$("#delroutine").remove();
+});
+
+$("#addroutine").click(function(){
+	$("#routine0").clone().appendTo("#routine0");
+});
