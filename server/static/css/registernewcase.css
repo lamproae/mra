@@ -1,0 +1,31 @@
+/* css for add more item */
+.nextBtn, .finish  {margin-top: 20px;}
+.close-div-button{float: right;margin-right: -20px; cursor: pointer;}
+.current-field-checkbox { position: relative; height: 40px;margin-left: 27px;}
+.close-div-button .delete{ font-size: 22px;line-height: 45px; }
+.hidden-div{display: none;}
+
+#table {
+	border-radius: 10px;
+	background-color: #bec9db;
+	margin-bottom: 5px;
+}
+td{
+	padding: 5px;
+}
+
+#add{
+	border-radius: 5px;
+	background-color: #96ceb4;
+}
+
+#remove{
+	border-radius: 5px;
+	background-color: #ff6f69;
+
+}
+
+.table-sortable tbody tr {
+	cursor: move;
+}
+
