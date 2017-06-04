@@ -178,8 +178,58 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			log.Println("Cannot parse form: ", err.Error())
 			return
 		}
+		//@liwei: This is a very stuiped method. We need just return the opertion status to user.
+		t, err := template.ParseFiles("template/newtask.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
 
-		log.Println(r.Form)
+		err = t.Execute(w, struct {
+			Title string
+			ID    string
+		}{
+			Title: "NewTask",
+			ID:    "1",
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func ShowTask(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func NewTask(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/newtask.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, &struct {
+			ID string
+		}{
+			ID: "1",
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+		http.Redirect(w, r, "/newtask", http.StatusTemporaryRedirect)
 	} else {
 		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
 	}
@@ -258,6 +308,7 @@ func main() {
 	http.HandleFunc("/formsubmit", FormSubmit)
 	http.HandleFunc("/modularcase", ModularCase)
 	http.HandleFunc("/newcase", NewCase)
+	http.HandleFunc("/newtask", NewTask)
 	http.HandleFunc("/pagefooter", PageFoorter)
 	http.HandleFunc("/registernewcase", RegisterNewCase)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
