@@ -38,5 +38,6 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", MainPage)
+	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
 }
