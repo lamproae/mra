@@ -18,32 +18,32 @@ $("#add").click(function(){
 	$("#table").clone().appendTo("#div1");
 });
 
-var i=1;
-$("#add_row").click(function(){
-	$('#addr'+i).html("<td align = 'center'><img src = 'http://www.placehold.it/200x200' alt = '...'></img></td><td><input name='emotion"+i+"' type='text' placeholder='Emotion' class='form-control input-md'/> </td><td><input  name='source"+i+"' type='text' placeholder='Source'  class='form-control input-md'></td>");
+var a=1;
+$("#add_assertion").click(function(){
+	$('#assert'+a).html("<td>"+ (a+1) +"</td><td><input name='mode"+a+"' type='text' placeholder='enable' class='form-control input-md'  /> </td><td><input  name='cli"+a+"' type='text' placeholder='show running-config'  class='form-control input-md'></td> <td><input  name='expect"+a+"' type='text' placeholder='br100[[:space:]]+up'  class='form-control input-md'></td>");
 
-	$('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-	i++; 
+	$('#assertion_tab').append('<tr id="assert'+(a+1)+'"></tr>');
+	a++; 
 });
-
-$("#delete_row").click(function(){
-	if(i>1){
-		$("#addr"+(i-1)).html('');
-		i--;
+$("#delete_assertion").click(function(){
+	if(a>1){
+		$("#assert"+(a-1)).html('');
+		a--;
 	}
 });
 
-var i=1;
-$("#add_row1").click(function(){
-	$('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='Name' class='form-control input-md'  /> </td><td><input  name='mail"+i+"' type='text' placeholder='Mail'  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder='Mobile'  class='form-control input-md'></td>");
 
-	$('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-	i++; 
+var c=1;
+$("#add_command").click(function(){
+	$('#command'+c).html("<td>"+ (c+1) +"</td><td><input name='mode"+c+"' type='text' placeholder='enable' class='form-control input-md'  /> </td><td><input  name='cli"+c+"' type='text' placeholder='show running-config'  class='form-control input-md'></td>");
+
+	$('#command_tab').append('<tr id="command'+(c+1)+'"></tr>');
+	c++; 
 });
-$("#delete_row1").click(function(){
-	if(i>1){
-		$("#addr"+(i-1)).html('');
-		i--;
+$("#delete_command").click(function(){
+	if(c>1){
+		$("#command"+(c-1)).html('');
+		c--;
 	}
 });
 

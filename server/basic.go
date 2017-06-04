@@ -33,6 +33,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/inputtest", Description: "This is a page for test html form."},
 			{Link: "/registernewcase", Description: "Register a new ATS case."},
 			{Link: "/index", Description: "This is also the main page."},
+			{Link: "/formsubmit", Description: "This is a page for form submit example."},
 		},
 	}
 
@@ -100,6 +101,33 @@ func RegisterNewCase(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func FormSubmit(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/formsubmit.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
 func InputTest(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
@@ -143,6 +171,7 @@ func main() {
 	http.HandleFunc("/invalid", InvalidReqMethodHandler)
 	http.HandleFunc("/bootstrap", BootStrap)
 	http.HandleFunc("/inputtest", InputTest)
+	http.HandleFunc("/formsubmit", FormSubmit)
 	http.HandleFunc("/registernewcase", RegisterNewCase)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
