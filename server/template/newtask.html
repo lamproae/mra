@@ -1,48 +1,56 @@
 {{template "header" .}} 
-<div class="container">
+<div class="container-fluid">
 	<form class="form-horizontal" role="form" action="newtask" method="post">
 		<fieldset>
-			<legend>Task{{.ID}}</legend>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="case_name">Name</label>
-				<div class="col-sm-4">
-					<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="case_name">Pre Condition</label>
-				<div class="col-sm-4">
-					{{template "routine"}}
-					<div>
-						<a id="add_dut" class="pull-left">Add Pre-Condtion</a><a id='del_dut' class="pull-right">Del Pre-Condition</a>
+			<div class="row-fluid">
+				<div class="span12">
+					<legend>Task{{.ID}}</legend>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="case_name">Name</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="case_name">Pre Condition</label>
+						<div class="col-sm-4">
+							{{$FirstPreCondition := "Pre-Condition"}}
+							{{template "routine" $FirstPreCondition}}
+							<div>
+								<a id="add_precondition" class="pull-left">Add Pre-Condtion</a><a id='del_precondition' class="pull-right">Del Pre-Condition</a>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="case_name">Routines</label>
+						<div class="col-sm-4">
+							{{$FirstRoutine := "Routine"}}
+							{{template "routine" $FirstRoutine}}
+							<div>
+								<a id="add_routine" class="pull-left">Add Routine</a><a id='del_routine' class="pull-right">Del Routine</a>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="case_name">Post Condition</label>
+						<div class="col-sm-4">
+							{{$FirstPostCondition := "Post-Condition"}}
+							{{template "routine" $FirstPostCondition}}
+							<div>
+								<a id="add_postcondition" class="pull-left">Add Post-Condition</a><a id='del_postcondition' class="pull-right">Del Post-Condition</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="case_name">Routines</label>
-				<div class="col-sm-4">
-					{{template "routine"}}
-					<div>
-						<a id="add_dut" class="pull-left">Add Routine</a><a id='del_dut' class="pull-right">Del Routine</a>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="case_name">Post Condition</label>
-				<div class="col-sm-4">
-					{{template "routine"}}
-					<div>
-						<a id="add_dut" class="pull-left">Add Post-Condition</a><a id='del_dut' class="pull-right">Del Post-Condition</a>
-					</div>
-				</div>
-			</div>
-
 		</fieldset>     
 		<fieldset>
-			<legend></legend>
-			<div class="col-sm-2"></div>
-			<div class="col-sm-4">
-				<button type="submit" name="submit" class="btn btn-block">Submit</button>
+			<div class="row-fluid">
+				<legend></legend>
+				<div class="col-sm-2"></div>
+				<div class="col-sm-4">
+					<button type="submit" name="submit" class="btn btn-block">Submit</button>
+				</div>
 			</div>
 		</fieldset>
 	</form>

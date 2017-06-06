@@ -1,87 +1,86 @@
 {{define "routine"}}
 <div class="routine" id="routine0">
-	<div class="row">
-		<div class="col-md-4" >
-			<fieldset>
-				<legend>Routine</legend>
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="textinput">Name</label>
-					<!--<div class="col-md-4 col-md-offset-2" >-->
-					<div class="col-md-4">
-						<input class="form-control col-md-4" id="name" name="name" type="text" placeholder="Create VLAN Interface"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="textinput">DUT</label>
-					<!--<div class="col-md-4 col-md-offset-2" >-->
-					<div class="col-md-4">
-						<input class="form-control col-md-4" id="dut" name="dut" type="text" placeholder="DUT1"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="routine_description" class="col-sm-2 control-label">Command</label>
-					<div class="container">
-						<div class="row clearfix">
-							<div class="col-md-12 column">
-								<table class="table table-bordered table-hover" id="command_tab">
-									<thead>
-										<tr >
-											<th class="text-center col-md-4">#</th>
-											<th class="text-center col-md-4">Mode</th>
-											<th class="text-center col-md-4">CLI</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr id='command0'>
-											<td>1</td>
-											<td><input type="text" name='mode0'  placeholder='enable' class="form-control col-md-4"/></td>
-											<td><input type="text" name='cli' placeholder='show runngin-config' class="form-control col-md-4"/></td>
-										</tr>
-										<tr id='command1'></tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
+	<fieldset>
+		<legend>{{.}}<1></legend>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="textinput">Name</label>
+			<div class="col-sm-4">
+				<input class="form-control" id="{{.}}{{`name`}}{{`1`}}" name="{{.}}{{`name`}}{{`1`}}" type="text" placeholder="Create VLAN Interface"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="textinput">DUT</label>
+			<div class="col-sm-4">
+				<input class="form-control" id="{{.}}{{`dut`}}{{`1`}}" name="{{.}}{{`dut`}}{{`1`}}" type="text" placeholder="DUT1"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="routine_description" >Command</label>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 column">
+						<table class="table table-bordered table-hover" id="command_tab">
+							<thead>
+								<tr >
+									<th class="text-center col-sm-1">#</th>
+									<th class="text-center col-sm-1">Mode</th>
+									<th class="text-center col-sm-4">CLI</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr id='command0'>
+									<td class="text-center">1</td>
+									<td class="text-center"><input type="text" name="mode"  placeholder='enable' class="form-control col-sm-1"/></td>
+									<td class="text-center"><input type="text" name="cli" placeholder='show runngin-config' class="form-control col-sm-4"/></td>
+								</tr>
+								<tr id='command1'></tr>
+							</tbody>
+						</table>
 						<a id="add_command" class="pull-left">Add Commnad</a><a id='delete_command' class="pull-right">Delete Command</a>
 					</div>
-				</div><!-- from group-->
-				<div class="form-group">
-					<label for="routine_description" class="col-sm-2 control-label">Assertion</label>
-					<div class="container">
-						<div class="row clearfix">
-							<div class="col-md-12 column">
-								<table class="table table-bordered table-hover" id="assertion_tab">
-									<thead>
-										<tr >
-											<th class="text-center col-md-4">#</th>
-											<th class="text-center col-md-4">Mode</th>
-											<th class="text-center col-md-4">CLI</th>
-											<th class="text-center col-md-4">Expected</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr id='assert0'>
-											<td>1</td>
-											<td><input type="text" name='mode0'  placeholder='enable' class="form-control col-md-4"/></td>
-											<td><input type="text" name='cli0' placeholder='show runngin-config' class="form-control col-md-4"/></td>
-											<td><input type="text" name='expected0' placeholder='br1000[[:space:]]+up' class="form-control col-md-4"/></td>
-										</tr>
-										<tr id='assert1'></tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
+				</div>
+			</div>
+		</div><!-- from group-->
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="routine_description">Assertion</label>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10 column">
+						<table class="table table-bordered table-hover" id="assertion_tab">
+							<thead>
+								<tr >
+									<th class="text-center col-sm-1">#</th>
+									<th class="text-center col-sm-1">Mode</th>
+									<th class="text-center col-sm-4">CLI</th>
+									<th class="text-center col-sm-4">Expected</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr id='assert0'>
+									<td class="text-center">1</td>
+									<td class="text-center"><input type="text" name='mode0'  placeholder='enable' class="form-control col-sm-1"/></td>
+									<td class="text-center"><input type="text" name='cli0' placeholder='show runngin-config' class="form-control col-sm-4"/></td>
+									<td class="text-center"><input type="text" name='expected0' placeholder='br1000[[:space:]]+up' class="form-control col-sm-4"/></td>
+								</tr>
+								<tr id='assert1'></tr>
+							</tbody>
+						</table>
 						<a id="add_assertion" class="pull-left">Add Assertion</a><a id='delete_assertion' class="pull-right">Delete Assertion</a>
 					</div>
-					<div class="form-group">
-						<label for="routine_description" class="col-sm-2 control-label">Description</label>
-						<div class="col-md-4 col-md-offset-2" >
-							<textarea id="routine_description" name="routine_description" class="form-control col-md-4" rows="5"></textarea>
-						</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="routine_description" class="col-sm-2 control-label">Description</label>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 column">
+						<textarea id="{{.}}{{`routine_description`}}{{`1`}}" name="{{.}}{{`routine_description`}}{{`1`}}" class="form-control col-sm-6" rows="5"></textarea>
 					</div>
 				</div>
-			</fieldset>
+			</div>
 		</div>
-	</div>
+		<a id="{{`del_`}}{{.}}" class="pull-left">Add {{.}}</a><a id="{{`del_`}}{{.}}" class="pull-right">Del {{.}}</a>
+	</fieldset>
 </div>
 {{end}}

@@ -33,6 +33,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/inputtest", Description: "This is a page for test html form."},
 			{Link: "/registernewcase", Description: "Register a new ATS case."},
 			{Link: "/index", Description: "This is also the main page."},
+			{Link: "/bootcss", Description: "sample layout from bootcss."},
 			{Link: "/pagefooter", Description: "This is also the main page."},
 			{Link: "/formsubmit", Description: "This is a page for form submit example."},
 			{Link: "/modularcase", Description: "Try to make the test case create page more flexibale."},
@@ -235,6 +236,25 @@ func NewTask(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func BootCSS(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	t, err := template.ParseFiles("template/bootcss_layout.html", "template/footer.html", "template/header.html")
+	if err != nil {
+		log.Println(err)
+		io.WriteString(w, err.Error())
+		return
+	}
+
+	err = t.Execute(w, &struct {
+		ID string
+	}{
+		ID: "1",
+	})
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+
 func FormSubmit(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
@@ -309,6 +329,7 @@ func main() {
 	http.HandleFunc("/modularcase", ModularCase)
 	http.HandleFunc("/newcase", NewCase)
 	http.HandleFunc("/newtask", NewTask)
+	http.HandleFunc("/bootcss", BootCSS)
 	http.HandleFunc("/pagefooter", PageFoorter)
 	http.HandleFunc("/registernewcase", RegisterNewCase)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
