@@ -14,6 +14,8 @@ $("#delete_assertion").click(function(){
 
 var c=1;
 $("#add_command").click(function(){
+	alert("Hello world")
+	//alert($("#add_command").prev().name())
 	$('#command'+c).html("<td>"+ (c+1) +"</td><td><input name='mode"+c+"' type='text' placeholder='enable' class='form-control input-md'  /> </td><td><input  name='cli"+c+"' type='text' placeholder='show running-config'  class='form-control input-md'></td>");
 
 	$('#command_tab').append('<tr id="command'+(c+1)+'"></tr>');

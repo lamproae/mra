@@ -38,6 +38,11 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/formsubmit", Description: "This is a page for form submit example."},
 			{Link: "/modularcase", Description: "Try to make the test case create page more flexibale."},
 			{Link: "/newcase", Description: "Re-Design the case create function."},
+			{Link: "/precondition", Description: "PreCondition."},
+			{Link: "/postcondition", Description: "PostCondition."},
+			{Link: "/taskroutine", Description: "TaskRoutine."},
+			{Link: "/prepostroutine", Description: "PrePostRoutine."},
+			{Link: "/stepforward", Description: "StepForward."},
 		},
 	}
 
@@ -309,6 +314,141 @@ func InputTest(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func PreCondition(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/precondition.html", "template/footer.html", "template/header.html", "template/routine.html", "template/stepforward.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func PostCondition(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/postcondition.html", "template/footer.html", "template/header.html", "template/routine.html", "template/stepforward.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func TaskRoutine(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/taskroutine.html", "template/footer.html", "template/header.html", "template/routine.html", "template/stepforward.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func PrePostRoutine(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/prepostroutine.html", "template/footer.html", "template/header.html", "template/routine.html", "template/stepforward.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func StepForward(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/stepforward.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
 func ResourceNotFoundHandler(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -332,6 +472,11 @@ func main() {
 	http.HandleFunc("/bootcss", BootCSS)
 	http.HandleFunc("/pagefooter", PageFoorter)
 	http.HandleFunc("/registernewcase", RegisterNewCase)
+	http.HandleFunc("/precondition", PreCondition)
+	http.HandleFunc("/postcondition", PostCondition)
+	http.HandleFunc("/taskroutine", TaskRoutine)
+	http.HandleFunc("/stepforward", StepForward)
+	http.HandleFunc("/prepostroutine", PrePostRoutine)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
 }

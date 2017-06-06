@@ -1,0 +1,30 @@
+{{define "stepforward"}}
+{{$ACTIVE := "active"}}
+{{$DISABLED := "disabled"}}
+<div class="container">
+	<div class="row form-group">
+		<div class="col-xs-12">
+			<ul class="nav nav-pills nav-justified thumbnail setup-panel">
+				<li class="{{if eq . "Pre-Condition"}}{{$ACTIVE}}{{else}}{{$DISABLED}}{{end}}"><a href="#precondition">
+						<h4 class="list-group-item-heading">Pre-Conditions</h4>
+						<p class="list-group-item-text">Pre-Conditions For A Task</p>
+					</a>
+				</li>
+				<li class="{{if eq . "Routine"}}{{$ACTIVE}}{{else}}{{$DISABLED}}{{end}}"><a href="#routine">
+						<h4 class="list-group-item-heading">Routines</h4>
+						<p class="list-group-item-text">Test Routines for a Task</p>
+					</a>
+				</li>
+				<li class="{{if eq . "Post-Condition"}}{{$ACTIVE}}{{else}}{{$DISABLED}}{{end}}"><a href="#Post-Conditions">
+						<h4 class="list-group-item-heading">Post-Conditions</h4>
+						<p class="list-group-item-text">Post-Conditions For a Task</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>	
+<script type="text/javascript" src="static/js/stepforward.js"></script>
+<link rel="stylesheet" href="static/css/stepforward.css">
+{{end}}
+
