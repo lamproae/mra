@@ -43,6 +43,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/taskroutine", Description: "TaskRoutine."},
 			{Link: "/prepostroutine", Description: "PrePostRoutine."},
 			{Link: "/stepforward", Description: "StepForward."},
+			{Link: "/newnewtask", Description: "NewNewTask."},
 		},
 	}
 
@@ -222,9 +223,11 @@ func NewTask(w http.ResponseWriter, r *http.Request) {
 		}
 
 		err = t.Execute(w, &struct {
-			ID string
+			Title string
+			ID    string
 		}{
-			ID: "1",
+			Title: "NewTask",
+			ID:    "1",
 		})
 		if err != nil {
 			log.Println(err.Error())
@@ -236,6 +239,39 @@ func NewTask(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		http.Redirect(w, r, "/newtask", http.StatusTemporaryRedirect)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func NewNewTask(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, &struct {
+			Title string
+			ID    string
+		}{
+			Title: "NewTask",
+			ID:    "1",
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
 	} else {
 		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
 	}
@@ -476,6 +512,7 @@ func main() {
 	http.HandleFunc("/postcondition", PostCondition)
 	http.HandleFunc("/taskroutine", TaskRoutine)
 	http.HandleFunc("/stepforward", StepForward)
+	http.HandleFunc("/newnewtask", NewNewTask)
 	http.HandleFunc("/prepostroutine", PrePostRoutine)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)

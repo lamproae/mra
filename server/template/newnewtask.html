@@ -1,0 +1,54 @@
+{{template "header" .}} 
+<div class="container-fluid">
+	<form class="form-horizontal" role="form" action="newnewtask" method="post">
+		<fieldset>
+			<div class="row-fluid">
+					<legend>Task{{.ID}}</legend>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="task_name">Name</label>
+						<div class="col-sm-4">
+							<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="stage_name">Pre Condition</label>
+						<div class="col-sm-4">
+							{{$PreCondition := "precondition"}}
+							{{template "condition" $PreCondition}}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="stage_name">Routines</label>
+						<div class="col-sm-4">
+							{{$Routine := "routine"}}
+							{{template "newroutine" $Routine}}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="stage_name">Post Condition</label>
+						<div class="col-sm-4">
+							{{$PostCondition := "postcondition"}}
+							{{template "condition" $PostCondition}}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="stage_name">Clear</label>
+						<div class="col-sm-4">
+							{{$Routine := "clear"}}
+							{{template "newroutine" $Routine}}
+						</div>
+					</div>
+			</div>
+		</fieldset>     
+		<fieldset>
+			<div class="row-fluid">
+				<legend></legend>
+				<div class="col-sm-4 col-sm-offset-2">
+					<button type="submit" name="submit" class="btn btn-block">Submit</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
+<script type="text/javascript" src="static/js/newnewtask.js"></script>
+{{template "footer"}}
