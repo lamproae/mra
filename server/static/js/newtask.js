@@ -37,3 +37,11 @@ $("#delroutine").click(function(){
 $("#addroutine").click(function(){
 	$("#routine0").clone().appendTo("#routine0");
 });
+
+$(#"continue").onclick(function() {
+	alert("Continue")
+}
+
+$(#"finish").click(function() {
+	alert("finish")
+}

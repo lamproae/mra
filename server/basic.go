@@ -92,7 +92,7 @@ func RedirectToMain(w http.ResponseWriter, r *http.Request) {
 func RegisterNewCase(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/registernewcase.html", "template/footer.html", "template/header.html")
+		t, err := template.ParseFiles("template/registernewcase.html", "template/footer.html", "template/header.html", "template/casenavigator.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -173,7 +173,7 @@ func ModularCase(w http.ResponseWriter, r *http.Request) {
 func NewCase(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/newcase.html", "template/footer.html", "template/header.html")
+		t, err := template.ParseFiles("template/newcase.html", "template/footer.html", "template/header.html", "template/casenavigator.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -191,7 +191,7 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		//@liwei: This is a very stuiped method. We need just return the opertion status to user.
-		t, err := template.ParseFiles("template/newtask.html", "template/footer.html", "template/header.html", "template/routine.html")
+		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -199,11 +199,17 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 		}
 
 		err = t.Execute(w, struct {
-			Title string
-			ID    string
+			Title   string
+			ID      string
+			Device  string
+			Group   string
+			Feature string
 		}{
-			Title: "NewTask",
-			ID:    "1",
+			Title:   "NewTask",
+			ID:      "1",
+			Device:  "V8500",
+			Group:   "L2",
+			Feature: "Vlan create",
 		})
 		if err != nil {
 			log.Println(err.Error())
@@ -252,7 +258,7 @@ func NewTask(w http.ResponseWriter, r *http.Request) {
 func NewNewTask(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html")
+		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -260,11 +266,17 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 		}
 
 		err = t.Execute(w, &struct {
-			Title string
-			ID    string
+			Title   string
+			ID      string
+			Device  string
+			Group   string
+			Feature string
 		}{
-			Title: "NewTask",
-			ID:    "1",
+			Title:   "NewTask",
+			ID:      "1",
+			Device:  "V8500",
+			Group:   "L2",
+			Feature: "Vlan create",
 		})
 		if err != nil {
 			log.Println(err.Error())
@@ -277,6 +289,64 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 		}
 
 		log.Println(r.Form)
+
+		for k, v := range r.Form {
+			log.Println(k, "-----> ", v)
+		}
+
+		if _, ok := r.Form["continue"]; ok {
+			t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
+			if err != nil {
+				log.Println(err)
+				io.WriteString(w, err.Error())
+				return
+			}
+
+			err = t.Execute(w, &struct {
+				Title   string
+				ID      string
+				Device  string
+				Group   string
+				Feature string
+				Case    string
+			}{
+				Title:   "NewTask",
+				ID:      "2",
+				Device:  "V8500",
+				Group:   "L2",
+				Feature: "VLAN",
+				Case:    "Vlan create",
+			})
+			if err != nil {
+				log.Println(err.Error())
+			}
+		} else {
+			t, err := template.ParseFiles("template/caseinfo.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
+			if err != nil {
+				log.Println(err)
+				io.WriteString(w, err.Error())
+				return
+			}
+			err = t.Execute(w, &struct {
+				Title   string
+				ID      string
+				Device  string
+				Group   string
+				Feature string
+				Case    string
+			}{
+				Title:   "NewTask",
+				ID:      "1",
+				Device:  "V8500",
+				Group:   "L2",
+				Feature: "VLAN",
+				Case:    "Vlan create",
+			})
+			if err != nil {
+				log.Println(err.Error())
+			}
+		}
+
 	} else {
 		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
 	}

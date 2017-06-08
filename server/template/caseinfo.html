@@ -1,0 +1,14 @@
+{{template "header"}}
+<div class="container-fluid display-table v-align">
+	<div class="row-fluid display-table-row">
+		<div class="col-sm-3">
+			{{template "casenavigator"}}
+		</div>
+		<fieldset>
+			<div class="row-fluid">
+				<legend>{{.Device}}▶{{.Group}}▶{{.Feature}}▶{{.Case}}</legend>
+			</div>
+		</fieldset>
+	</div>
+</div>
+{{template "footer"}}

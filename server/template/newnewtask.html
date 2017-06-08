@@ -1,15 +1,14 @@
 {{template "header" .}} 
-<div class="container-fluid">
-	<form class="form-horizontal" role="form" action="newnewtask" method="post">
-		<fieldset>
-			<div class="row-fluid">
-					<legend>Task{{.ID}}</legend>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="task_name">Name</label>
-						<div class="col-sm-4">
-							<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
-						</div>
-					</div>
+<div class="container-fluid display-table v-align">
+	<div class="row-fluid display-table-row">
+		<div class="col-sm-3">
+			{{template "casenavigator"}}
+		</div>
+
+		<form class="form-horizontal" role="form" action="newnewtask" method="post">
+			<fieldset>
+				<div class="row-fluid">
+					<legend>{{.Device}}▶{{.Group}}▶{{.Feature}}▶{{.Case}}->Task#{{.ID}}</legend>
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="stage_name">Pre Condition</label>
 						<div class="col-sm-4">
@@ -38,17 +37,21 @@
 							{{template "newroutine" $Routine}}
 						</div>
 					</div>
-			</div>
-		</fieldset>     
-		<fieldset>
-			<div class="row-fluid">
-				<legend></legend>
-				<div class="col-sm-4 col-sm-offset-2">
-					<button type="submit" name="submit" class="btn btn-block">Submit</button>
 				</div>
-			</div>
-		</fieldset>
-	</form>
+			</fieldset>     
+			<fieldset>
+				<div class="row-fluid">
+					<legend></legend>
+					<div class="col-sm-4 col-sm-offset-2">
+						<button type="submit" id="continue" name="continue" class="btn btn-block">Continue</button>
+					</div>
+					<div class="col-sm-4 col-sm-offset-2">
+						<button type="submit" id="finish" name="finish" class="btn btn-block">Finish</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
 </div>
 <script type="text/javascript" src="static/js/newnewtask.js"></script>
 {{template "footer"}}

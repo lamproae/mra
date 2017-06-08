@@ -2,7 +2,7 @@
 <div class="container-fluid">
 	<fieldset>
 		<div class="form-group">
-			<label class="col-sm-2 control-label" for="{{.}}{{`_description`}}">Commands</label>
+			<label class="col-sm-2 control-label" for="{{.}}{{`_description`}}">CMD</label>
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-10 column">
@@ -19,10 +19,10 @@
 							<tbody>
 								<tr id="{{.}}{{`_command_0`}}">
 									<td class="text-center">0</td>
-									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_dut`}}"  placeholder='DUT0' class="form-control col-sm-1"/></td>
-									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_mode`}}"  placeholder='enable' class="form-control col-sm-1"/></td>
-									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_cli`}}" placeholder='show runngin-config' class="form-control col-sm-4"/></td>
-									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_expected`}}" placeholder='br1000[[_space_]]+up' class="form-control col-sm-4"/></td>
+									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_dut`}}" value="DUT1"  placeholder='DUT0' class="form-control col-sm-1"/></td>
+									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_mode`}}" value="enable"  placeholder='enable' class="form-control col-sm-1"/></td>
+									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_cli`}}" value="show running-config" placeholder='show runngin-config' class="form-control col-sm-4"/></td>
+									<td class="text-center"><input type="text" name="{{.}}{{`_command_0_expected`}}" value="this can be empty" placeholder='br1000[[_space_]]+up' class="form-control col-sm-4"/></td>
 								</tr>
 								<tr id="{{.}}{{`_command_1`}}"></tr>
 							</tbody>
@@ -34,11 +34,11 @@
 		</div>
 		{{if eq . "routine"}}
 		<div class="form-group">
-			<label for="{{.}}{{`_description`}}" class="col-sm-2 control-label">Description</label>
+			<label for="{{.}}{{`_description`}}" class="col-sm-2 control-label">Desc</label>
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6 column">
-						<textarea id="{{.}}{{`_description`}}" name="{{.}}{{`_description`}}" class="form-control col-sm-6" rows="5"></textarea>
+						<textarea id="{{.}}{{`_description`}}" name="{{.}}{{`_description`}}" value="{{.}}" class="form-control col-sm-6" rows="5"></textarea>
 					</div>
 				</div>
 			</div>
