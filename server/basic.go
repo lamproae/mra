@@ -44,6 +44,10 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/prepostroutine", Description: "PrePostRoutine."},
 			{Link: "/stepforward", Description: "StepForward."},
 			{Link: "/newnewtask", Description: "NewNewTask."},
+			{Link: "/product", Description: "Connect to a product."},
+			{Link: "/productinfo", Description: "Product information."},
+			{Link: "/bootstraplayout", Description: "Product information."},
+			{Link: "/dashboard", Description: "Dashboard Sample"},
 		},
 	}
 
@@ -485,6 +489,203 @@ func StepForward(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ProductInfo(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/productinfo.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func RunScriptOnDevice(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/runscriptondevice.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func DumpDeviceCurrentStatus(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/devicecurrentstatus.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func DeviceTestCases(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/devicetestcases.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func BootstrapLayout(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/bootstraplayout.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func Dashboard(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/dashboard.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func Product(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/product.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+		t, err := template.ParseFiles("template/productinfo.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, struct{ Name string }{Name: "V8500"})
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
 func ResourceNotFoundHandler(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -514,6 +715,13 @@ func main() {
 	http.HandleFunc("/stepforward", StepForward)
 	http.HandleFunc("/newnewtask", NewNewTask)
 	http.HandleFunc("/prepostroutine", PrePostRoutine)
+	http.HandleFunc("/product", Product)
+	http.HandleFunc("/productinfo", ProductInfo)
+	http.HandleFunc("/allcases", DeviceTestCases)
+	http.HandleFunc("/devicestatus", DumpDeviceCurrentStatus)
+	http.HandleFunc("/runscript", RunScriptOnDevice)
+	http.HandleFunc("/bootstraplayout", BootstrapLayout)
+	http.HandleFunc("/dashboard", Dashboard)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
 }

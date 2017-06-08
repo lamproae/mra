@@ -1,0 +1,49 @@
+{{template "header"}}
+<div class="container">
+	<div class="col-sm-12">
+		<div class="bs-calltoaction bs-calltoaction-success">
+			<div class="row">
+				<div class="col-md-9 cta-contents">
+					<h1 class="cta-title">{{.}} Current Status</h1>
+					<div class="cta-desc">
+						<p>Get current status of the device.</p>
+					</div>
+				</div>
+				<div class="col-md-3 cta-button">
+					<a href="{{`devicestatus?device=`}}{.}" class="btn btn-lg btn-block btn-default">Go</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="bs-calltoaction bs-calltoaction-primary">
+			<div class="row">
+				<div class="col-md-9 cta-contents">
+					<h1 class="cta-title">Test Case For {{.}}</h1>
+					<div class="cta-desc">
+						<p>{{.}} all test cases.</p>
+					</div>
+				</div>
+				<div class="col-md-3 cta-button">
+					<a href="{{`allcases?device=`}}{{.}}" class="btn btn-lg btn-block btn-primary">Go</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="bs-calltoaction bs-calltoaction-info">
+			<div class="row">
+				<div class="col-md-9 cta-contents">
+					<h1 class="cta-title">Run Script on {{.}}</h1>
+					<div class="cta-desc">
+						<p>Run user defined script on {{.}}.</p>
+					</div>
+				</div>
+				<div class="col-md-3 cta-button">
+					<a href="{{`runscript?device=`}}{{.}}" class="btn btn-lg btn-block btn-info">Go!</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<link rel="stylesheet" href="static/css/productinfo.css">
+{{template "footer"}}

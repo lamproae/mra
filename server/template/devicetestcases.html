@@ -1,0 +1,145 @@
+{{template "header"}}
+<div class="container-fluid">
+	<div class="row-fluid"> 
+		<div class="col-sm-3">
+			<div class="tree well">
+				<ul>
+					<li>
+						<span><i class="icon-folder-open"></i> L2 </span> <a href="runtestcases?root=l2">Run</a>
+						<ul>
+							<li>
+								<span><i class="icon-minus-sign"></i> VLAN </span> <a href="runtestcases?root=l2&group=vlan">Run</a>
+								<ul>
+									<li>
+										<span><i class="icon-leaf"></i> VLAN Create</span> <a href="runtestcases?root=l2&group=vlan&case=vlancreate">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i> VLAN Delete</span> <a href="">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i> VLAN Port Tagged</span> <a href="">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i> VLAN Port Untagged</span> <a href="">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i> VLAN Interface</span> <a href="">Run</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<span><i class="icon-minus-sign"></i> Port </span> <a href="">Run</a>
+								<ul>
+									<li>
+										<span><i class="icon-minus-sign"></i> Port Configurations</span> <a href="">Run</a>
+										<ul>
+											<li>
+												<span><i class="icon-minus-sign"></i> Port Prameters</span> <a href="">Run</a>
+												<ul>
+													<li>
+														<span><i class="icon-leaf"></i>Port Speed</span> <a href="">Run</a>
+													</li>
+													<li>
+														<span><i class="icon-leaf"></i>Port Nego</span> <a href="">Run</a>
+													</li>
+													<li>
+														<span><i class="icon-leaf"></i>Port Flow Control</span> <a href="">Run</a>
+													</li>
+													<li>
+														<span><i class="icon-leaf"></i>Port Description</span> <a href="">Run</a>
+													</li>
+												</ul>
+											</li>
+											<li>
+												<span><i class="icon-leaf"></i>Port Enable</span> <a href="">Run</a>
+											</li>
+											<li>
+												<span><i class="icon-leaf"></i>Port Disable</span> <a href="">Run</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i>Annother Test Cases for Port</span> <a href="">Run</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<span><i class="icon-folder-open"></i>Spanning Tree</span> <a href="">Run</a>
+								<ul>
+									<li>
+										<span><i class="icon-leaf"></i>STP</span> <a href="">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i>RSTP</span> <a href="">Run</a>
+									</li>
+
+									<li>
+										<span><i class="icon-leaf"></i>MSTP</span> <a href="">Run</a>
+									</li>
+								</ul>
+							</li>
+
+
+						</ul>
+					</li>
+					<li>
+						<span><i class="icon-folder-open"></i>L3</span> <a href="">Run</a>
+						<ul>
+							<li>
+								<span><i class="icon-leaf"></i>IPv4</span> <a href="">Run</a>
+								<ul>
+									<li>
+										<span><i class="icon-leaf"></i>Layer3 Interface</span> <a href="">Run</a>
+										<ul>
+											<li>
+												<span><i class="icon-leaf"></i>Interface Address Configuration</span> <a href="">Run</a>
+											</li>
+											<li>
+												<span><i class="icon-leaf"></i>Connected Route</span> <a href="">Run</a>
+											</li>
+											<li>
+												<span><i class="icon-leaf"></i>Layer 3 Basic Connection</span> <a href="">Run</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i>Static Route</span> <a href="">Run</a>
+										<ul>
+											<li>
+												<span><i class="icon-leaf"></i>Static Route Configuration</span> <a href="">Run</a>
+											</li>
+											<li>
+												<span><i class="icon-leaf"></i>Basic Connection</span> <a href="">Run</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i>OSPF</span> <a href="">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i>BGP</span> <a href="">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i>RIP</span> <a href="">Run</a>
+									</li>
+									<li>
+										<span><i class="icon-leaf"></i>ISIS</span> <a href="">Run</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<span><i class="icon-leaf"></i>IPv6</span> <a href="">Run</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-sm-7">
+			"Hello world"
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" href="static/css/devicetestcases.css">
+<script type="text/javascript" src="static/js/devicetestcases.js"></script>
+{{template "footer"}}
