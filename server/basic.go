@@ -204,12 +204,14 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			Device  string
 			Group   string
 			Feature string
+			Case    string
 		}{
 			Title:   "NewTask",
 			ID:      "1",
 			Device:  "V8500",
 			Group:   "L2",
-			Feature: "Vlan create",
+			Feature: "VLAN",
+			Case:    "Vlan Create",
 		})
 		if err != nil {
 			log.Println(err.Error())
