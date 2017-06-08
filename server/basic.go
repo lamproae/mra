@@ -48,6 +48,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/productinfo", Description: "Product information."},
 			{Link: "/bootstraplayout", Description: "Product information."},
 			{Link: "/dashboard", Description: "Dashboard Sample"},
+			{Link: "/sidebar", Description: "Sidbar Sample"},
 		},
 	}
 
@@ -573,7 +574,7 @@ func DumpDeviceCurrentStatus(w http.ResponseWriter, r *http.Request) {
 func DeviceTestCases(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/devicetestcases.html", "template/footer.html", "template/header.html")
+		t, err := template.ParseFiles("template/devicetestcases.html", "template/footer.html", "template/header.html", "template/casenavigator.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -628,6 +629,33 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
 		t, err := template.ParseFiles("template/dashboard.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			log.Println("Cannot parse form: ", err.Error())
+			return
+		}
+
+		log.Println(r.Form)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func SideBar(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/sidebar.html", "template/footer.html", "template/header.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -722,6 +750,7 @@ func main() {
 	http.HandleFunc("/runscript", RunScriptOnDevice)
 	http.HandleFunc("/bootstraplayout", BootstrapLayout)
 	http.HandleFunc("/dashboard", Dashboard)
+	http.HandleFunc("/sidebar", SideBar)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
 }
