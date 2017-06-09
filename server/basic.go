@@ -198,7 +198,9 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Printf("%#v", newcase)
 			DB.Add(newcase)
-			log.Printf("%q", DB.Dump())
+			log.Printf("%v", DB.Dump())
+			log.Printf("%#v", DB.Dump()[0].DUTs[0])
+			log.Println(DB)
 		}
 		//@liwei: This is a very stuiped method. We need just return the opertion status to user.
 		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")

@@ -14,6 +14,10 @@ type DUT struct {
 	Password string
 }
 
+func (d *DUT) String() string {
+	return "DUT{" + d.Device + ":" + d.Name + ":" + d.UserName + ":" + d.Password + "}"
+}
+
 type Condition struct {
 	Assertions  []*Assertion
 	Description string

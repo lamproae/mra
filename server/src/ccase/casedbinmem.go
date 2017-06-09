@@ -1,30 +1,52 @@
 package ccase
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
+	"log"
 	"sort"
 )
 
 type CaseDBInMem struct {
 	Device string
 	GCount int
-	FCount int
 	CCount int
 	Groups map[string]*Group
+}
+
+func (cdbim *CaseDBInMem) String() string {
+	var buffer bytes.Buffer
+	js, err := json.Marshal(cdbim)
+	if err != nil {
+		log.Println("Cannot format db for debug")
+		return ""
+	}
+
+	json.Indent(&buffer, js, "", "    ")
+
+	return buffer.String()
 }
 
 func (cdbim *CaseDBInMem) Add(c *Case) error {
 	g, ok := cdbim.Groups[c.Group]
 	if !ok {
 		cdbim.Groups[c.Group] = &Group{
-			Name:     c.Group,
-			Features: make(map[string]*Feature, 1),
+			Name:      c.Group,
+			SubGroups: make(map[string]*SubGroup, 1),
 		}
 		cdbim.GCount++
 		g, _ = cdbim.Groups[c.Group]
 	}
 
-	return g.Add(c)
+	err := g.Add(c)
+	if err != nil {
+		return err
+	}
+
+	cdbim.CCount++
+
+	return nil
 }
 
 func (cdbim *CaseDBInMem) Del(c *Case) error {
@@ -38,10 +60,12 @@ func (cdbim *CaseDBInMem) Del(c *Case) error {
 		return err
 	}
 
-	if len(g.Features) == 0 {
+	if len(g.SubGroups) == 0 {
 		delete(cdbim.Groups, c.Group)
 		cdbim.GCount--
 	}
+
+	cdbim.CCount--
 
 	return nil
 }
@@ -81,13 +105,22 @@ func (cdbim *CaseDBInMem) DumpGroup(group string) ([]*Case, error) {
 	return g.Dump(), nil
 }
 
-func (cdbim *CaseDBInMem) DumpFeature(group, feature string) ([]*Case, error) {
+func (cdbim *CaseDBInMem) DumpSubGroup(group, sgroup string) ([]*Case, error) {
+	g, ok := cdbim.Groups[group]
+	if !ok {
+		return nil, errors.New("Cannot find Group: " + group + " for dump")
+	}
+
+	return g.DumpSubGroup(sgroup)
+}
+
+func (cdbim *CaseDBInMem) DumpFeature(group, sgroup, feature string) ([]*Case, error) {
 	g, ok := cdbim.Groups[group]
 	if !ok {
 		return nil, errors.New("Cannot find Group: " + group + " for dump feature")
 	}
 
-	return g.DumpFeature(feature)
+	return g.DumpFeature(sgroup, feature)
 }
 
 type GroupSlice []*Group

@@ -6,82 +6,99 @@ import (
 )
 
 type Group struct {
-	Name     string
-	FCount   int
-	CCount   int
-	Features map[string]*Feature
+	Name      string
+	SGCount   int
+	CCount    int
+	SubGroups map[string]*SubGroup
 }
 
 func (g *Group) Add(c *Case) error {
-	f, ok := g.Features[c.Feature]
+	sg, ok := g.SubGroups[c.SubGroup]
 	if !ok {
-		g.Features[c.Feature] = &Feature{
-			Name:  c.Feature,
-			Cases: make(map[string]*Case, 1),
+		g.SubGroups[c.SubGroup] = &SubGroup{
+			Name:     c.SubGroup,
+			Features: make(map[string]*Feature, 1),
 		}
-		g.FCount++
-		f, _ = g.Features[c.Feature]
+		g.SGCount++
+		sg, _ = g.SubGroups[c.SubGroup]
 	}
 
-	return f.Add(c)
-}
-
-func (g *Group) Del(c *Case) error {
-	f, ok := g.Features[c.Feature]
-	if !ok {
-		return errors.New("Cannot find Feature: " + c.Feature + " in Group: " + c.Group + " for delete case: " + c.Name)
-	}
-
-	err := f.Del(c)
+	err := sg.Add(c)
 	if err != nil {
 		return err
 	}
 
-	if len(f.Cases) == 0 {
-		delete(g.Features, c.Feature)
-		g.FCount--
-	}
+	g.CCount++
 
 	return nil
 }
 
+func (g *Group) Del(c *Case) error {
+	sg, ok := g.SubGroups[c.SubGroup]
+	if !ok {
+		return errors.New("Cannot find Feature: " + c.Feature + " in Group: " + c.Group + " for delete case: " + c.Name)
+	}
+
+	err := sg.Del(c)
+	if err != nil {
+		return err
+	}
+
+	if len(sg.Features) == 0 {
+		delete(g.SubGroups, c.SubGroup)
+		g.SGCount--
+	}
+
+	g.CCount--
+	return nil
+}
+
 func (g *Group) Get(c *Case) (*Case, error) {
-	f, ok := g.Features[c.Feature]
+	sg, ok := g.SubGroups[c.SubGroup]
 	if !ok {
 		return nil, errors.New("Cannot find Feature: " + c.Feature + " in Group: " + c.Group + " for Get case: " + c.Name)
 	}
 
-	return f.Get(c)
+	return sg.Get(c)
 }
 
 func (g *Group) Dump() []*Case {
 	result := make([]*Case, 0, 10)
-	fs := make([]*Feature, 0, len(g.Features))
+	sgs := make([]*SubGroup, 0, len(g.SubGroups))
 
-	for _, g := range g.Features {
-		fs = append(fs, g)
+	for _, sg := range g.SubGroups {
+		sgs = append(sgs, sg)
 	}
 
 	//sort.Slice(fs, func(i, j int) bool { return fs[i].Name < fs[j].Name })
-	sort.Stable(FeatureSlice(fs))
-	for _, f := range fs {
-		result = append(result, f.Dump()...)
+	sort.Stable(SubGroupSlice(sgs))
+	for _, sg := range sgs {
+		result = append(result, sg.Dump()...)
 	}
 
 	return result
 }
 
-func (g *Group) DumpFeature(feature string) ([]*Case, error) {
-	f, ok := g.Features[feature]
+func (g *Group) DumpSubGroup(sgroup string) ([]*Case, error) {
+	sg, ok := g.SubGroups[sgroup]
 	if !ok {
-		return nil, errors.New("Cannot find Group: " + feature + " for dump")
+		return nil, errors.New("Cannot find SubGroup: " + sgroup + " for dump")
 	}
 
-	return f.Dump(), nil
+	return sg.Dump(), nil
 }
 
-type FeatureSlice []*Feature
+func (g *Group) DumpFeature(sgroup, feature string) ([]*Case, error) {
+	sg, ok := g.SubGroups[sgroup]
+	if !ok {
+		return nil, errors.New("Cannot find SubGroup: " + sgroup + " for dump")
+	}
 
-func (s FeatureSlice) Len() int           { return len(s) }
-func (s FeatureSlice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
-func (s FeatureSlice) Less(i, j int) bool { return s[i].Name < s[j].Name }
+	return sg.DumpFeature(feature)
+}
+
+type SubGroupSlice []*SubGroup
+
+func (s SubGroupSlice) Len() int           { return len(s) }
+func (s SubGroupSlice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+func (s SubGroupSlice) Less(i, j int) bool { return s[i].Name < s[j].Name }
