@@ -6,6 +6,7 @@ import (
 	"errors"
 	"log"
 	"sort"
+	"util"
 )
 
 type CaseDBInMem struct {
@@ -22,6 +23,7 @@ func (cdbim *CaseDBInMem) String() string {
 		log.Println("Cannot format db for debug")
 		return ""
 	}
+	util.SaveToFile("testcases.json", js)
 
 	json.Indent(&buffer, js, "", "    ")
 

@@ -2,7 +2,7 @@
 <div class="container-fluid display-table">
 	<div class="row-fluid display-table-row">
 		<div class="col-sm-3">
-			{{template "casenavigator"}}
+			{{template "casenavigator" .DB}}
 		</div>
 		<form class="form-horizontal" role="form" action="runcase?feature=all" method="get">
 			<div class="col-sm-3">
@@ -12,6 +12,14 @@
 		<form class="form-horizontal" role="form" action="newcase" method="get">
 			<div class="col-sm-4">
 				<button class="btn btn-default green-circle-button" href="newcase">New<span class="green-circle-greater-than"></span></button>
+			</div>
+		</form>
+		<form class="form-horizontal" role="form" action="runcase?feature=all" method="get">
+			<div class="col-sm-3">
+				<p>{{.DB.Device}}</p>
+				<p>{{.DB.GCount}}</p>
+				<p>{{.DB.CCount}}</p>
+				<p>{{.DB.Groups}}</p>
 			</div>
 		</form>
 	</div>

@@ -1,135 +1,56 @@
 {{define "casenavigator"}}
 <div class="tree well">
+	<span>{{.Device}}</span>
+	{{$glen := len .Groups}}
+	{{if ne $glen 0}}
 	<ul>
+		{{range .Groups}}
 		<li>
-			<span><i class="icon-folder-open"></i> L2 </span> <a href="runtestcases?root=l2">Run</a>
+			<span><i class="icon-folder-open"></i> {{.Name}} </span> <a href="runtestcases?root=l2">Run</a>
+			{{$sglen := len .SubGroups}}
+			{{if ne $sglen 0}}
 			<ul>
+				{{range .SubGroups}}
 				<li>
-					<span><i class="icon-minus-sign"></i> VLAN </span> <a href="runtestcases?root=l2&group=vlan">Run</a>
+					<span><i class="icon-minus-sign"></i> {{.Name}} </span> <a href="">Run</a>
+					{{$flen := len .Features}}
+					{{if ne $flen 0}}
 					<ul>
+						{{range .Features}}
 						<li>
-							<span><i class="icon-leaf"></i> VLAN Create</span> <a href="runtestcases?root=l2&group=vlan&case=vlancreate">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i> VLAN Delete</span> <a href="">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i> VLAN Port Tagged</span> <a href="">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i> VLAN Port Untagged</span> <a href="">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i> VLAN Interface</span> <a href="">Run</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<span><i class="icon-minus-sign"></i> Port </span> <a href="">Run</a>
-					<ul>
-						<li>
-							<span><i class="icon-minus-sign"></i> Port Configurations</span> <a href="">Run</a>
+							<span><i class="icon-minus-sign"></i> {{.Name}} </span> <a href="">Run</a>
+							{{$clen := len .Cases}}
+							{{if ne $clen 0}}
 							<ul>
+								{{range .Cases}}
 								<li>
-									<span><i class="icon-minus-sign"></i> Port Prameters</span> <a href="">Run</a>
+									<span><i class="icon-minus-sign"></i> {{.Name}}</span> <a href="">Run</a>
+									{{$tlen := len .Tasks}}
+									{{if ne $tlen 0}}
 									<ul>
+										{{range .Tasks}}
 										<li>
-											<span><i class="icon-leaf"></i>Port Speed</span> <a href="">Run</a>
+											<span><i class="icon-leaf"></i>{{.Name}}</span> <a href="">Run</a>
 										</li>
-										<li>
-											<span><i class="icon-leaf"></i>Port Nego</span> <a href="">Run</a>
-										</li>
-										<li>
-											<span><i class="icon-leaf"></i>Port Flow Control</span> <a href="">Run</a>
-										</li>
-										<li>
-											<span><i class="icon-leaf"></i>Port Description</span> <a href="">Run</a>
-										</li>
+										{{end}}
 									</ul>
+									{{end}}
 								</li>
-								<li>
-									<span><i class="icon-leaf"></i>Port Enable</span> <a href="">Run</a>
-								</li>
-								<li>
-									<span><i class="icon-leaf"></i>Port Disable</span> <a href="">Run</a>
-								</li>
+								{{end}}
 							</ul>
+							{{end}}
 						</li>
-						<li>
-							<span><i class="icon-leaf"></i>Annother Test Cases for Port</span> <a href="">Run</a>
-						</li>
+						{{end}}
 					</ul>
+					{{end}}
 				</li>
-				<li>
-					<span><i class="icon-folder-open"></i>Spanning Tree</span> <a href="">Run</a>
-					<ul>
-						<li>
-							<span><i class="icon-leaf"></i>STP</span> <a href="">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i>RSTP</span> <a href="">Run</a>
-						</li>
-
-						<li>
-							<span><i class="icon-leaf"></i>MSTP</span> <a href="">Run</a>
-						</li>
-					</ul>
-				</li>
-
-
+				{{end}}
 			</ul>
+			{{end}}
 		</li>
-		<li>
-			<span><i class="icon-folder-open"></i>L3</span> <a href="">Run</a>
-			<ul>
-				<li>
-					<span><i class="icon-leaf"></i>IPv4</span> <a href="">Run</a>
-					<ul>
-						<li>
-							<span><i class="icon-leaf"></i>Layer3 Interface</span> <a href="">Run</a>
-							<ul>
-								<li>
-									<span><i class="icon-leaf"></i>Interface Address Configuration</span> <a href="">Run</a>
-								</li>
-								<li>
-									<span><i class="icon-leaf"></i>Connected Route</span> <a href="">Run</a>
-								</li>
-								<li>
-									<span><i class="icon-leaf"></i>Layer 3 Basic Connection</span> <a href="">Run</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i>Static Route</span> <a href="">Run</a>
-							<ul>
-								<li>
-									<span><i class="icon-leaf"></i>Static Route Configuration</span> <a href="">Run</a>
-								</li>
-								<li>
-									<span><i class="icon-leaf"></i>Basic Connection</span> <a href="">Run</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i>OSPF</span> <a href="">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i>BGP</span> <a href="">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i>RIP</span> <a href="">Run</a>
-						</li>
-						<li>
-							<span><i class="icon-leaf"></i>ISIS</span> <a href="">Run</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<span><i class="icon-leaf"></i>IPv6</span> <a href="">Run</a>
-				</li>
-			</ul>
-		</li>
+		{{end}}
 	</ul>
+	{{end}}
 </div>
 <link rel="stylesheet" href="static/css/casenavigator.css">
 <script type="text/javascript" src="static/js/casenavigator.js"></script>

@@ -2,8 +2,10 @@ package main
 
 import (
 	"ccase"
+	"encoding/json"
 	"html/template"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -49,6 +51,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 			{Link: "/productinfo", Description: "Product information."},
 			{Link: "/bootstraplayout", Description: "Product information."},
 			{Link: "/dashboard", Description: "Dashboard Sample"},
+			{Link: "/newpagenavigator", Description: "NewPageNavigator"},
 			{Link: "/sidebar", Description: "Sidbar Sample"},
 		},
 	}
@@ -100,7 +103,13 @@ func RegisterNewCase(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = t.Execute(w, nil)
+		err = t.Execute(w, struct {
+			Title string
+			DB    *ccase.CaseDBInMem
+		}{
+			Title: "Device test cases",
+			DB:    DB,
+		})
 		if err != nil {
 			log.Println(err.Error())
 		}
@@ -181,7 +190,13 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = t.Execute(w, nil)
+		err = t.Execute(w, struct {
+			Title string
+			DB    *ccase.CaseDBInMem
+		}{
+			Title: "Create new Test Case",
+			DB:    DB,
+		})
 		if err != nil {
 			log.Println(err.Error())
 		}
@@ -203,7 +218,8 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			log.Println(DB)
 		}
 		//@liwei: This is a very stuiped method. We need just return the opertion status to user.
-		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
+		t, err := template.ParseFiles("template/newcase.html", "template/footer.html", "template/header.html", "template/casenavigator.html")
+		//t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -217,6 +233,7 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			Group   string
 			Feature string
 			Case    string
+			DB      *ccase.CaseDBInMem
 		}{
 			Title:   "NewTask",
 			ID:      "1",
@@ -224,6 +241,7 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 			Group:   "L2",
 			Feature: "VLAN",
 			Case:    "Vlan Create",
+			DB:      DB,
 		})
 		if err != nil {
 			log.Println(err.Error())
@@ -285,12 +303,16 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 			Device  string
 			Group   string
 			Feature string
+			Case    string
+			DB      *ccase.CaseDBInMem
 		}{
 			Title:   "NewTask",
 			ID:      "1",
 			Device:  "V8500",
 			Group:   "L2",
 			Feature: "Vlan create",
+			Case:    "Invalid",
+			DB:      DB,
 		})
 		if err != nil {
 			log.Println(err.Error())
@@ -323,6 +345,7 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 				Group   string
 				Feature string
 				Case    string
+				DB      *ccase.CaseDBInMem
 			}{
 				Title:   "NewTask",
 				ID:      "2",
@@ -330,6 +353,7 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 				Group:   "L2",
 				Feature: "VLAN",
 				Case:    "Vlan create",
+				DB:      DB,
 			})
 			if err != nil {
 				log.Println(err.Error())
@@ -348,6 +372,7 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 				Group   string
 				Feature string
 				Case    string
+				DB      *ccase.CaseDBInMem
 			}{
 				Title:   "NewTask",
 				ID:      "1",
@@ -355,6 +380,7 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 				Group:   "L2",
 				Feature: "VLAN",
 				Case:    "Vlan create",
+				DB:      DB,
 			})
 			if err != nil {
 				log.Println(err.Error())
@@ -665,7 +691,13 @@ func DeviceTestCases(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = t.Execute(w, nil)
+		err = t.Execute(w, struct {
+			Title string
+			DB    *ccase.CaseDBInMem
+		}{
+			Title: "Device test cases",
+			DB:    DB,
+		})
 		if err != nil {
 			log.Println(err.Error())
 		}
@@ -846,4 +878,11 @@ func init() {
 		Device: "V8500",
 		Groups: make(map[string]*ccase.Group, 1),
 	}
+
+	value, err := ioutil.ReadFile("testcases.json")
+	if err != nil {
+		panic(err)
+	}
+
+	json.Unmarshal(value, DB)
 }
