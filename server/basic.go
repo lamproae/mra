@@ -346,7 +346,7 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 		Name:     r.FormValue("name"),
 	})
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
+		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html", "template/taskheader.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -386,7 +386,7 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if _, ok := r.Form["continue"]; ok {
-			t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
+			t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html", "template/taskheader.html")
 			if err != nil {
 				log.Println(err)
 				io.WriteString(w, err.Error())
@@ -406,7 +406,7 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 				log.Println(err.Error())
 			}
 		} else {
-			t, err := template.ParseFiles("template/dumpcase.html", "template/footer.html", "template/header.html", "template/caseheader.html", "template/casenavigator.html")
+			t, err := template.ParseFiles("template/dumpcase.html", "template/footer.html", "template/header.html", "template/caseheader.html", "template/casenavigator.html", "template/taskheader.html")
 			if err != nil {
 				log.Println(err)
 				io.WriteString(w, err.Error())

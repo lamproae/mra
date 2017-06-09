@@ -8,7 +8,8 @@
 		<form class="form-horizontal" role="form" action="newnewtask?group={{.Case.Group}}&&sgroup={{.Case.SubGroup}}&&feature={{.Case.Feature}}&&name={{.Case.Name}}" method="post">
 			<fieldset>
 				<div class="row-fluid">
-					<legend>{{.DB.Device}}▶{{.Case.Group}}▶{{.Case.SubGroup}}▶{{.Case.Feature}}▶{{.Case.Name}}->Task#{{.Case.TCount}}</legend>
+					<legend>{{template "taskheader" .Case}}</legend>
+
 					<div class="form-group">
 						<label for="routine_description" class="col-sm-2 control-label">Name</label>
 						<div class="col-sm-5">
