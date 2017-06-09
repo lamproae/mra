@@ -1,6 +1,7 @@
 package main
 
 import (
+	"ccase"
 	"html/template"
 	"io"
 	"log"
@@ -189,6 +190,15 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println("Cannot parse form: ", err.Error())
 			return
+		}
+
+		newcase, err := ccase.CreateNewCase(r.Form)
+		if err != nil {
+			log.Println("Cannot create new Case: ", err)
+		} else {
+			log.Printf("%#v", newcase)
+			DB.Add(newcase)
+			log.Printf("%q", DB.Dump())
 		}
 		//@liwei: This is a very stuiped method. We need just return the opertion status to user.
 		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
@@ -825,4 +835,13 @@ func main() {
 	http.HandleFunc("/sidebar", SideBar)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
+}
+
+var DB *ccase.CaseDBInMem
+
+func init() {
+	DB = &ccase.CaseDBInMem{
+		Device: "V8500",
+		Groups: make(map[string]*ccase.Group, 1),
+	}
 }
