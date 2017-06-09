@@ -36,7 +36,7 @@ func (sg *SubGroup) Add(c *Case) error {
 func (sg *SubGroup) Del(c *Case) error {
 	f, ok := sg.Features[c.Feature]
 	if !ok {
-		return errors.New("Cannot find Feature: " + c.Feature + " in Group: " + c.Group + " for delete case: " + c.Name)
+		return errors.New("Cannot find Feature: " + c.Feature + " in SubGroup: " + c.SubGroup + " for delete case: " + c.Name)
 	}
 
 	err := f.Del(c)
@@ -57,7 +57,7 @@ func (sg *SubGroup) Del(c *Case) error {
 func (sg *SubGroup) Get(c *Case) (*Case, error) {
 	f, ok := sg.Features[c.Feature]
 	if !ok {
-		return nil, errors.New("Cannot find Feature: " + c.Feature + " in Group: " + c.Group + " for Get case: " + c.Name)
+		return nil, errors.New("Cannot find Feature: " + c.Feature + " in SubGroup: " + c.SubGroup + " for Get case: " + c.Name)
 	}
 
 	return f.Get(c)

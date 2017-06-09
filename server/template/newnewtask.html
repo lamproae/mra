@@ -5,10 +5,16 @@
 			{{template "casenavigator" .DB}}
 		</div>
 
-		<form class="form-horizontal" role="form" action="newnewtask" method="post">
+		<form class="form-horizontal" role="form" action="newnewtask?group={{.Case.Group}}&&sgroup={{.Case.SubGroup}}&&feature={{.Case.Feature}}&&name={{.Case.Name}}" method="post">
 			<fieldset>
 				<div class="row-fluid">
-					<legend>{{.Device}}▶{{.Group}}▶{{.Feature}}▶{{.Case}}->Task#{{.ID}}</legend>
+					<legend>{{.DB.Device}}▶{{.Case.Group}}▶{{.Case.SubGroup}}▶{{.Case.Feature}}▶{{.Case.Name}}->Task#{{.Case.TCount}}</legend>
+					<div class="form-group">
+						<label for="routine_description" class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-5">
+							<input class="form-control col-sm-offset-2" id="task_name" name="task_name" type="text" placeholder="Do something"/>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="stage_name">Pre Condition</label>
 						<div class="col-sm-4">

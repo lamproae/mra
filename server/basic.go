@@ -200,7 +200,6 @@ func DumpCase(w http.ResponseWriter, r *http.Request) {
 			Name:     r.FormValue("name"),
 		})
 
-		log.Println(DB)
 		if err != nil {
 			io.WriteString(w, err.Error())
 			return
@@ -332,6 +331,20 @@ func NewTask(w http.ResponseWriter, r *http.Request) {
 
 func NewNewTask(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
+	err := r.ParseForm()
+	if err != nil {
+		log.Println("Cannot parse form: ", err.Error())
+		return
+	}
+
+	log.Println(r.Form)
+
+	c, err := DB.Get(&ccase.Case{
+		Group:    r.FormValue("group"),
+		SubGroup: r.FormValue("sgroup"),
+		Feature:  r.FormValue("feature"),
+		Name:     r.FormValue("name"),
+	})
 	if r.Method == "GET" {
 		t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
 		if err != nil {
@@ -341,36 +354,35 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 		}
 
 		err = t.Execute(w, &struct {
-			Title   string
-			ID      string
-			Device  string
-			Group   string
-			Feature string
-			Case    string
-			DB      *ccase.CaseDBInMem
+			Title string
+			Case  *ccase.Case
+			DB    *ccase.CaseDBInMem
 		}{
-			Title:   "NewTask",
-			ID:      "1",
-			Device:  "V8500",
-			Group:   "L2",
-			Feature: "Vlan create",
-			Case:    "Invalid",
-			DB:      DB,
+			Title: c.Name,
+			Case:  c,
+			DB:    DB,
 		})
 		if err != nil {
 			log.Println(err.Error())
 		}
+
 	} else if r.Method == "POST" {
-		err := r.ParseForm()
+
 		if err != nil {
-			log.Println("Cannot parse form: ", err.Error())
+			io.WriteString(w, err.Error())
 			return
 		}
 
-		log.Println(r.Form)
+		newTask, err := ccase.CreateNewTask(r.Form)
+		if err != nil {
+			log.Printf("%q, %q", newTask, err)
+			io.WriteString(w, err.Error())
+			return
+		}
 
-		for k, v := range r.Form {
-			log.Println(k, "-----> ", v)
+		if err := c.AddTask(newTask); err != nil {
+			io.WriteString(w, err.Error())
+			return
 		}
 
 		if _, ok := r.Form["continue"]; ok {
@@ -382,48 +394,33 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 			}
 
 			err = t.Execute(w, &struct {
-				Title   string
-				ID      string
-				Device  string
-				Group   string
-				Feature string
-				Case    string
-				DB      *ccase.CaseDBInMem
+				Title string
+				Case  *ccase.Case
+				DB    *ccase.CaseDBInMem
 			}{
-				Title:   "NewTask",
-				ID:      "2",
-				Device:  "V8500",
-				Group:   "L2",
-				Feature: "VLAN",
-				Case:    "Vlan create",
-				DB:      DB,
+				Title: c.Name,
+				Case:  c,
+				DB:    DB,
 			})
 			if err != nil {
 				log.Println(err.Error())
 			}
 		} else {
-			t, err := template.ParseFiles("template/caseinfo.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html")
+			t, err := template.ParseFiles("template/dumpcase.html", "template/footer.html", "template/header.html", "template/caseheader.html", "template/casenavigator.html")
 			if err != nil {
 				log.Println(err)
 				io.WriteString(w, err.Error())
 				return
 			}
+
 			err = t.Execute(w, &struct {
-				Title   string
-				ID      string
-				Device  string
-				Group   string
-				Feature string
-				Case    string
-				DB      *ccase.CaseDBInMem
+				Title string
+				Case  *ccase.Case
+				DB    *ccase.CaseDBInMem
 			}{
-				Title:   "NewTask",
-				ID:      "1",
-				Device:  "V8500",
-				Group:   "L2",
-				Feature: "VLAN",
-				Case:    "Vlan create",
-				DB:      DB,
+				Title: c.Name,
+				Case:  c,
+				DB:    DB,
 			})
 			if err != nil {
 				log.Println(err.Error())
