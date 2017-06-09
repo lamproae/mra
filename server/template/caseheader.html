@@ -1,0 +1,34 @@
+{{define "caseheader"}}
+	<div class="row-fluid">
+		<button class="btn btn-danger"><h4>{{.Group}}</h4></button>
+		<button class="btn btn-success"><h4>{{.SubGroup}}</h4></button>
+		<button class="btn btn-warning"><h4>{{.Feature}}</h4></button>
+		<button class="btn btn-primary"><h4>{{.Name}}</h4></button>
+	</div>
+
+	{{$tlen := len .Tasks}}
+	{{if ne $tlen 0 }}
+	{{range .Tasks}}
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<a class="btn icon-btn btn-danger" href="#"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Delete</a>
+			<div class="update-nag">
+				<div class="update-split update-info"><i class="glyphicon glyphicon-leaf"></i></div>
+				<div class="update-text"> {{.Name}} </div>
+			</div>
+		</div>
+	</div>
+	{{end}}
+	{{else}}
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<div class="update-nag">
+				<div class="update-split update-info"><i class="glyphicon glyphicon-leaf"></i></div>
+				<div class="update-text"> No Task Exist for Case: <strong>{{.Name}}</strong> </div>
+			</div>
+		</div>
+	</div>
+	{{end}}
+<link rel="stylesheet" href="static/css/caseheader.css">
+<script type="text/javascript" src="static/js/caseheader.js"></script>
+{{end}}

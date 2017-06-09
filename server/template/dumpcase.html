@@ -1,0 +1,19 @@
+{{template "header"}} 
+<div class="container-fluid display-table">
+	<div class="row-fluid display-table-row">
+		<div class="col-sm-3">
+			{{template "casenavigator" .DB}}
+		</div>
+		<fieldset>
+			{{template "caseheader" .Case}} 
+		</fieldset>
+		<fieldset>
+			<div class="col-sm-10">
+				<a class="btn icon-btn btn-success pull-right" href='newnewtask?group={{.Case.Group}}&&sgroup={{.Case.SubGroup}}&&feature={{.Case.Feature}}&&name={{.Case.Name}}'><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>New Task</a>
+			</div>
+		</fieldset>
+	</div>
+</div>
+<script type="text/javascript" src="static/js/newcase.js"></script>
+<link rel="stylesheet" href="static/css/newcase.css">
+{{template "footer"}}

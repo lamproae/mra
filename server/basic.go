@@ -180,6 +180,49 @@ func ModularCase(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func DumpCase(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/dumpcase.html", "template/footer.html", "template/header.html", "template/caseheader.html", "template/casenavigator.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		r.ParseForm()
+		log.Println(r.Form)
+
+		c, err := DB.Get(&ccase.Case{
+			Group:    r.FormValue("group"),
+			SubGroup: r.FormValue("sgroup"),
+			Feature:  r.FormValue("feature"),
+			Name:     r.FormValue("name"),
+		})
+
+		log.Println(DB)
+		if err != nil {
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, struct {
+			Title string
+			Case  *ccase.Case
+			DB    *ccase.CaseDBInMem
+		}{
+			Title: "Create new Test Case",
+			Case:  c,
+			DB:    DB,
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
 func NewCase(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
@@ -867,6 +910,7 @@ func main() {
 	http.HandleFunc("/bootstraplayout", BootstrapLayout)
 	http.HandleFunc("/dashboard", Dashboard)
 	http.HandleFunc("/sidebar", SideBar)
+	http.HandleFunc("/dumpcase", DumpCase)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
 }

@@ -73,6 +73,10 @@ func (cdbim *CaseDBInMem) Del(c *Case) error {
 }
 
 func (cdbim *CaseDBInMem) Get(c *Case) (*Case, error) {
+	for k, v := range cdbim.Groups {
+		log.Println(len(k), k, v, c.Name, c.Group, len(c.Group))
+	}
+
 	g, ok := cdbim.Groups[c.Group]
 	if !ok {
 		return nil, errors.New("Cannot find Group: " + c.Group + " for Get case: " + c.Name)
