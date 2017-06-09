@@ -13,6 +13,7 @@
 					<legend>{{template "caseheader" .Case}}</legend>
 					<div class="form-group">
 						{{$tlen := len .Case.Tasks}}
+						{{$CaseName :=  .Case.Name}}
 						{{if ne $tlen 0 }}
 						{{range .Case.Tasks}}
 						<div class="row-fluid">
@@ -20,7 +21,7 @@
 								<a class="btn icon-btn btn-danger" href="#"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Delete</a>
 								<div class="update-nag">
 									<div class="update-split update-info"><i class="glyphicon glyphicon-leaf"></i></div>
-									<div class="update-text"> {{.Case.Name}} </div>
+									<div class="update-text"> {{$CaseName}} </div>
 								</div>
 							</div>
 						</div>
@@ -30,7 +31,7 @@
 							<div class="col-md-12">
 								<div class="update-nag">
 									<div class="update-split update-info"><i class="glyphicon glyphicon-leaf"></i></div>
-									<div class="update-text"> No Task Exist for Case: <strong>{{.Case.Name}}</strong> </div>
+									<div class="update-text"> No Task Exist for Case: <strong>{{$CaseName}}</strong> </div>
 								</div>
 							</div>
 						</div>
