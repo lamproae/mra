@@ -380,38 +380,6 @@ func ShowTask(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func NewTask(w http.ResponseWriter, r *http.Request) {
-	log.Println(r.Method)
-	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/newtask.html", "template/footer.html", "template/header.html")
-		if err != nil {
-			log.Println(err)
-			io.WriteString(w, err.Error())
-			return
-		}
-
-		err = t.Execute(w, &struct {
-			Title string
-			ID    string
-		}{
-			Title: "NewTask",
-			ID:    "1",
-		})
-		if err != nil {
-			log.Println(err.Error())
-		}
-	} else if r.Method == "POST" {
-		err := r.ParseForm()
-		if err != nil {
-			log.Println("Cannot parse form: ", err.Error())
-			return
-		}
-		http.Redirect(w, r, "/newtask", http.StatusTemporaryRedirect)
-	} else {
-		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
-	}
-}
-
 func EditTask(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	err := r.ParseForm()
@@ -576,6 +544,8 @@ func NewNewTask(w http.ResponseWriter, r *http.Request) {
 			io.WriteString(w, err.Error())
 			return
 		}
+
+		DB.Save()
 
 		if _, ok := r.Form["continue"]; ok {
 			t, err := template.ParseFiles("template/newnewtask.html", "template/footer.html", "template/header.html", "template/newroutine.html", "template/condition.html", "template/casenavigator.html", "template/taskheader.html")
@@ -1147,7 +1117,6 @@ func main() {
 	http.HandleFunc("/formsubmit", FormSubmit)
 	http.HandleFunc("/modularcase", ModularCase)
 	http.HandleFunc("/newcase", NewCase)
-	http.HandleFunc("/newtask", NewTask)
 	http.HandleFunc("/bootcss", BootCSS)
 	http.HandleFunc("/pagefooter", PageFoorter)
 	http.HandleFunc("/registernewcase", RegisterNewCase)
