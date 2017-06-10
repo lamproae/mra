@@ -1,11 +1,13 @@
 {{define "caseheader"}}
-	<div class="row-fluid">
-		<button class="btn btn-danger ignore"><h4>{{.Group}}</h4></button>
-		<button class="btn btn-success ignore"><h4>{{.SubGroup}}</h4></button>
-		<button class="btn btn-warning ignore"><h4>{{.Feature}}</h4></button>
-		<button class="btn btn-primary ignore"><h4>{{.Name}}</h4></button>
-	</div>
-
+<div class="row-fluid">
+	<button class="btn btn-danger ignore"><h4>{{.Group}}</h4></button>
+	<button class="btn btn-success ignore"><h4>{{.SubGroup}}</h4></button>
+	<button class="btn btn-warning ignore"><h4>{{.Feature}}</h4></button>
+	<button class="btn btn-primary ignore"><h4>{{.Name}}</h4></button>
+	{{range .DUTs}}
+	<button class="btn btn-info ignore pull-right"><h4>{{.Name}}∥{{.Device}}</h4></button>
+	{{end}}
+</div>
 <link rel="stylesheet" href="static/css/caseheader.css">
 <script type="text/javascript" src="static/js/caseheader.js"></script>
 {{end}}
