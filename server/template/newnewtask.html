@@ -5,15 +5,15 @@
 			{{template "casenavigator" .DB}}
 		</div>
 
-		<form class="form-horizontal" role="form" action="newnewtask?group={{.Case.Group}}&&sgroup={{.Case.SubGroup}}&&feature={{.Case.Feature}}&&name={{.Case.Name}}" method="post">
+		<form class="form-horizontal" role="form" id="newtaskform" action="newnewtask?group={{.Case.Group}}&&sgroup={{.Case.SubGroup}}&&feature={{.Case.Feature}}&&name={{.Case.Name}}" method="post">
 			<fieldset>
 				<div class="row-fluid">
 					<legend>{{template "taskheader" .Case}}</legend>
 
 					<div class="form-group">
 						<label for="routine_description" class="col-sm-2 control-label">Name</label>
-						<div class="col-sm-5">
-							<input class="form-control col-sm-offset-2" id="task_name" name="task_name" type="text" placeholder="Do something"/>
+						<div class="col-sm-4">
+							<input class="form-control required col-sm-offset-2" id="task_name" name="task_name" type="text" placeholder="Do something"/>
 						</div>
 					</div>
 					<div class="form-group">
@@ -55,11 +55,11 @@
 			<fieldset>
 				<div class="row-fluid">
 					<legend></legend>
-					<div class="col-sm-4 col-sm-offset-2">
-						<button type="submit" id="continue" name="continue" class="btn btn-block">Continue</button>
+					<div class="col-sm-3 col-sm-offset-3">
+						<button type="submit" id="continue" name="continue" class="btn icon-btn btn-success">Continue</button>
 					</div>
-					<div class="col-sm-4 col-sm-offset-2">
-						<button type="submit" id="finish" name="finish" class="btn btn-block">Finish</button>
+					<div class="col-sm-4">
+						<button type="submit" id="finish" name="finish" class="btn icon-btn btn-primary">Finish</button>
 					</div>
 				</div>
 			</fieldset>

@@ -1,18 +1,18 @@
 {{template "header" .}} 
 <div class="container">
-	<form class="form-horizontal" role="form" action="product" method="post">
+	<form class="form-horizontal" id="productform" role="form" action="product" method="post">
 		<fieldset>
 			<legend>Connect to a product</legend>
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="case_name">Name</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="product_name" name="product_name" type="text" placeholder="V8500"/>
+					<input class="form-control required" id="product_name" name="product_name" type="text" placeholder="V8500"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="group">UserName</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="username" name="username" type="text" placeholder="admin"/>
+					<input class="form-control required" id="username" name="username" type="text" placeholder="admin"/>
 				</div>
 			</div>
 

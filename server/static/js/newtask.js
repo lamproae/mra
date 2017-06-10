@@ -45,3 +45,7 @@ $(#"continue").onclick(function() {
 $(#"finish").click(function() {
 	alert("finish")
 }
+
+$().ready(function() {
+	$("#newtaskform").validate();
+});
