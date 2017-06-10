@@ -1,0 +1,65 @@
+{{template "header" .}} 
+<div class="container-fluid display-table v-align">
+	<div class="row-fluid display-table-row">
+		<div class="col-sm-3">
+			{{template "casenavigator" .DB}}
+		</div>
+		<div class="col-sm-9">
+			<form class="form-horizontal" role="form" id="edittaskform" action="edittask?group={{.Case.Group}}&&sgroup={{.Case.SubGroup}}&&feature={{.Case.Feature}}&&name={{.Case.Name}}" method="post">
+				<div class="row-fluid">
+					<legend>{{template "taskheader" .Case}}</legend>
+
+					<fieldset id="taskFieldSet" disabled>
+						<div class="form-group">
+							<label for="routine_description" class="col-sm-2 control-label">Name</label>
+							<div class="col-sm-4">
+								<input class="form-control required col-sm-offset-2" id="task_name" name="task_name" value="{{.Task.Name}}" type="text" placeholder="Do something"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="stage_name">Pre Condition</label>
+							<div class="col-sm-4">
+								{{template "dumpcondition" .Task.PreCondition}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="stage_name">Routines</label>
+							<div class="col-sm-4">
+								{{template "dumproutine" .Task.Routine}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="stage_name">Post Condition</label>
+							<div class="col-sm-4">
+								{{template "dumpcondition" .Task.PostCondition}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="stage_name">Clear</label>
+							<div class="col-sm-4">
+								{{template "dumproutine" .Task.Clear}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="routine_description" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-5">
+								<textarea id="task_description" name="task_description" class="form-control col-sm-offset-2" rows="5">{{.Task.Description}}</textarea>
+							</div>
+						</div>
+				</div>
+					</fieldset>
+					<div class="row-fluid">
+						<legend></legend>
+						<div class="col-sm-3 col-sm-offset-3">
+							<button type="submit" id="continue" name="continue" class="btn icon-btn btn-success editbtn">Edit</button>
+						</div>
+						<div class="col-sm-4">
+							<button type="submit" id="finish" name="finish" class="btn icon-btn btn-primary">Run</button>
+						</div>
+					</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="static/js/dumptask.js"></script>
+{{template "footer"}}

@@ -30,6 +30,15 @@ func (cdbim *CaseDBInMem) String() string {
 	return buffer.String()
 }
 
+func (cdbim *CaseDBInMem) Save() {
+	js, err := json.Marshal(cdbim)
+	if err != nil {
+		log.Println("Cannot format db for debug")
+		return
+	}
+	util.SaveToFile("testcases.json", js)
+}
+
 func (cdbim *CaseDBInMem) Add(c *Case) error {
 	g, ok := cdbim.Groups[c.Group]
 	if !ok {
@@ -48,6 +57,7 @@ func (cdbim *CaseDBInMem) Add(c *Case) error {
 
 	cdbim.CCount++
 
+	cdbim.Save()
 	return nil
 }
 
@@ -69,6 +79,7 @@ func (cdbim *CaseDBInMem) Del(c *Case) error {
 
 	cdbim.CCount--
 
+	cdbim.Save()
 	return nil
 }
 

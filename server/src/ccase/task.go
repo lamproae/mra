@@ -43,20 +43,25 @@ func CreateNewTask(in url.Values) (*Task, error) {
 		return nil, errors.New("Cannot create new Task: " + err.Error())
 	}
 
+	log.Println(prec)
+
 	postc, err := GetPostCondition(in)
 	if err != nil {
 		return nil, errors.New("Cannot create new Task: " + err.Error())
 	}
 
+	log.Println(postc)
 	routine, err := GetRoutines(in)
 	if err != nil {
 		return nil, errors.New("Cannot create new Task: " + err.Error())
 	}
 
+	log.Println(routine)
 	clear, err := GetClearRoutines(in)
 	if err != nil {
 		return nil, errors.New("Cannot create new Task: " + err.Error())
 	}
+	log.Println(clear)
 
 	return &Task{
 		PreCondition:  prec,
@@ -108,6 +113,7 @@ func GetPreCondtion(in url.Values) (*Condition, error) {
 	sort.Stable(AssertionSlice(assertions))
 
 	return &Condition{
+		Name:        "precondition",
 		Description: description[0],
 		Assertions:  assertions,
 	}, nil
@@ -153,6 +159,7 @@ func GetPostCondition(in url.Values) (*Condition, error) {
 	sort.Stable(AssertionSlice(assertions))
 
 	return &Condition{
+		Name:        "postcondition",
 		Description: description[0],
 		Assertions:  assertions,
 	}, nil
@@ -205,6 +212,7 @@ func GetRoutines(in url.Values) (*Routine, error) {
 	sort.Stable(AssertionSlice(assertions))
 
 	return &Routine{
+		Name:        "routine",
 		Description: description[0],
 		Assertions:  assertions,
 	}, nil
@@ -249,6 +257,7 @@ func GetClearRoutines(in url.Values) (*Routine, error) {
 	sort.Stable(AssertionSlice(assertions))
 
 	return &Routine{
+		Name:       "clear",
 		Assertions: assertions,
 	}, nil
 }

@@ -28,12 +28,13 @@
 								{{range .Cases}}
 								<li>
 									<span><i class="icon-minus-sign"></i> <a href='dumpcase?group={{$gname}}&&sgroup={{$sgname}}&&feature={{$fname}}&&name={{.Name}}'>{{.Name}}</a></span> <a href="">Run</a>
+									{{$cname := .Name}}
 									{{$tlen := len .Tasks}}
 									{{if ne $tlen 0}}
 									<ul>
 										{{range .Tasks}}
 										<li>
-											<span><i class="icon-leaf"></i>{{.Name}}</span> <a href="">Run</a>
+											<span><i class="icon-leaf"></i>{{.Name}}</span> <a href='dumptask?group={{$gname}}&&sgroup={{$sgname}}&&feature={{$fname}}&&case={{$cname}}&&task={{.Name}}'>Run</a>
 										</li>
 										{{end}}
 									</ul>

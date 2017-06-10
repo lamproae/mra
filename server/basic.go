@@ -8,11 +8,26 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type Page struct {
 	Link        string
 	Description string
+}
+
+func ADD(a, b int) string {
+	return strconv.Itoa(a + b)
+}
+
+func Encap(i interface{}, a, b string) interface{} {
+	return struct {
+		o interface{}
+		a string
+	}{
+		o: i,
+		a: b,
+	}
 }
 
 func MainPage(w http.ResponseWriter, r *http.Request) {
@@ -180,6 +195,60 @@ func ModularCase(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func DeleteTask(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/dumpcase.html", "template/footer.html", "template/header.html", "template/caseheader.html", "template/casenavigator.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		r.ParseForm()
+		log.Println(r.Form)
+
+		c, err := DB.Get(&ccase.Case{
+			Group:    r.FormValue("group"),
+			SubGroup: r.FormValue("sgroup"),
+			Feature:  r.FormValue("feature"),
+			Name:     r.FormValue("case"),
+		})
+
+		if err != nil {
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = c.DelTask(&ccase.Task{
+			Name: r.FormValue("task"),
+		})
+
+		if err != nil {
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		DB.Save()
+
+		err = t.Execute(w, struct {
+			Title string
+			Case  *ccase.Case
+			DB    *ccase.CaseDBInMem
+		}{
+			Title: "Del Task",
+			Case:  c,
+			DB:    DB,
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
 func DumpCase(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
@@ -222,6 +291,52 @@ func DumpCase(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func DumpTask(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/dumptask.html", "template/footer.html", "template/header.html", "template/taskheader.html", "template/casenavigator.html", "template/dumpcondition.html", "template/dumproutine.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		r.ParseForm()
+		log.Println(r.Form)
+
+		c, err := DB.Get(&ccase.Case{
+			Group:    r.FormValue("group"),
+			SubGroup: r.FormValue("sgroup"),
+			Feature:  r.FormValue("feature"),
+			Name:     r.FormValue("case"),
+		})
+
+		task := c.GetTask(r.FormValue("task"))
+
+		if task == nil {
+			io.WriteString(w, "Cannot find task: "+r.FormValue("task"))
+			return
+		}
+
+		err = t.Execute(w, struct {
+			Title string
+			Case  *ccase.Case
+			DB    *ccase.CaseDBInMem
+			Task  *ccase.Task
+		}{
+			Title: "Dump Case Task",
+			Case:  c,
+			DB:    DB,
+			Task:  task,
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
 func NewCase(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
@@ -255,6 +370,7 @@ func NewCase(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Printf("%#v", newcase)
 			DB.Add(newcase)
+			DB.Save() //This should be more flexible
 			log.Printf("%v", DB.Dump())
 			log.Printf("%#v", DB.Dump()[0].DUTs[0])
 			log.Println(DB)
@@ -324,6 +440,115 @@ func NewTask(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		http.Redirect(w, r, "/newtask", http.StatusTemporaryRedirect)
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
+func EditTask(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	err := r.ParseForm()
+	if err != nil {
+		log.Println("Cannot parse form: ", err.Error())
+		return
+	}
+
+	log.Println(r.Form)
+
+	c, err := DB.Get(&ccase.Case{
+		Group:    r.FormValue("group"),
+		SubGroup: r.FormValue("sgroup"),
+		Feature:  r.FormValue("feature"),
+		Name:     r.FormValue("name"),
+	})
+
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/dumptask.html", "template/footer.html", "template/header.html", "template/taskheader.html", "template/casenavigator.html", "template/dumpcondition.html", "template/dumproutine.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		r.ParseForm()
+		log.Println(r.Form)
+
+		c, err := DB.Get(&ccase.Case{
+			Group:    r.FormValue("group"),
+			SubGroup: r.FormValue("sgroup"),
+			Feature:  r.FormValue("feature"),
+			Name:     r.FormValue("case"),
+		})
+
+		task := c.GetTask(r.FormValue("task"))
+
+		if task == nil {
+			io.WriteString(w, "Cannot find task: "+r.FormValue("task"))
+			return
+		}
+
+		t.Funcs(template.FuncMap{"ADD": ADD, "ENCAP": Encap})
+
+		err = t.Execute(w, struct {
+			Title string
+			Case  *ccase.Case
+			DB    *ccase.CaseDBInMem
+			Task  *ccase.Task
+		}{
+			Title: "Dump Case Task",
+			Case:  c,
+			DB:    DB,
+			Task:  task,
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		if err != nil {
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		newTask, err := ccase.CreateNewTask(r.Form)
+		if err != nil {
+			log.Printf("%q, %q", newTask, err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		if c.IsTaskExist(newTask) {
+			c.DelTask(newTask)
+		}
+
+		if err := c.AddTask(newTask); err != nil {
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		DB.Save() //This should be more flexible
+		t, err := template.ParseFiles("template/dumptask.html", "template/footer.html", "template/header.html", "template/taskheader.html", "template/casenavigator.html", "template/dumpcondition.html", "template/dumproutine.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		t.Funcs(template.FuncMap{"ADD": ADD, "ENCAP": Encap})
+		err = t.Execute(w, struct {
+			Title string
+			Case  *ccase.Case
+			DB    *ccase.CaseDBInMem
+			Task  *ccase.Task
+		}{
+			Title: "Dump Case Task",
+			Case:  c,
+			DB:    DB,
+			Task:  newTask,
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+
 	} else {
 		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
 	}
@@ -908,6 +1133,9 @@ func main() {
 	http.HandleFunc("/dashboard", Dashboard)
 	http.HandleFunc("/sidebar", SideBar)
 	http.HandleFunc("/dumpcase", DumpCase)
+	http.HandleFunc("/deletetask", DeleteTask)
+	http.HandleFunc("/dumptask", DumpTask)
+	http.HandleFunc("/edittask", EditTask)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
 }

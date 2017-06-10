@@ -138,7 +138,7 @@ func (c *Case) AddTask(t *Task) error {
 }
 
 func (c *Case) DelTask(t *Task) error {
-	if c.IsTaskExist(t) {
+	if !c.IsTaskExist(t) {
 		return errors.New("Cannot find task :" + t.Name + " in case: " + c.Name)
 	}
 
@@ -149,6 +149,16 @@ func (c *Case) DelTask(t *Task) error {
 	}
 
 	c.TCount--
+	return nil
+}
+
+func (c *Case) GetTask(name string) *Task {
+	for _, v := range c.Tasks {
+		if v.Name == name {
+			return v
+		}
+	}
+
 	return nil
 }
 
