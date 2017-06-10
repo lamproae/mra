@@ -1073,14 +1073,24 @@ func Product(w http.ResponseWriter, r *http.Request) {
 		}
 
 		log.Println(r.Form)
-		t, err := template.ParseFiles("template/productinfo.html", "template/footer.html", "template/header.html")
+		t, err := template.ParseFiles("template/devicetestcases.html", "template/footer.html", "template/header.html", "template/casenavigator.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
 			return
 		}
 
-		err = t.Execute(w, struct{ Name string }{Name: "V8500"})
+		err = t.Execute(w, struct {
+			Title string
+			DB    *ccase.CaseDBInMem
+		}{
+			Title: "Device test cases",
+			DB:    DB,
+		})
+		if err != nil {
+			log.Println(err.Error())
+		}
+
 	} else {
 		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
 	}
