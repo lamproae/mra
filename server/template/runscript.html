@@ -1,0 +1,50 @@
+{{template "header" .}} 
+<div class="container-fluid display-table v-align">
+	<div class="row-fluid display-table-row">
+		<form class="form-horizontal" role="form" id="commandform" action="runscript" method="post">
+			<fieldset>
+				<div class="row-fluid">
+					<button class="btn btn-primary ignore" type="submit"><h4>Run Script</h4></button>
+					<div class="col-sm-offset-4 col-sm-10 col-center-block">  
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="command_list">Command List</label>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-7">
+								<div class="row">
+									<div class="col-sm-12 column">
+										<table class="table table-bordered table-hover" id="command_tab">
+											<thead>
+												<tr >
+													<th class="text-center col-sm-1">#</th>
+													<th class="text-center col-sm-1">Delay</th>
+													<th class="text-center col-sm-1">Mode</th>
+													<th class="text-center col-sm-3">CLI</th>
+													<th class="text-center col-sm-3">Expected</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr id="command_0">
+													<td class="text-center">0</td>
+													<td class="text-center"><input type="text" name="command_delay~0" value="0"  placeholder='0s' class="form-control col-sm-1 required"/></td>
+													<td class="text-center"><input type="text" name="command_mode~0" value="enable"  placeholder='enable' class="form-control col-sm-1 required"/></td>
+													<td class="text-center"><input type="text" name="command_cli~0" value="show running" placeholder='show running-config' class="form-control col-sm-4 required"/></td>
+													<td class="text-center"><input type="text" name="command_expected~0" value="#" placeholder='br1000[[_space_]]+up' class="form-control col-sm-4 required"/></td>
+												</tr>
+												<tr id="command_1"></tr>
+											</tbody>
+										</table>
+										<a id="add_command" class="pull-left">Add Command</a><a id='delete_command' class="pull-right">Delete command</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>     
+		</form>
+	</div>
+</div>
+<link rel="stylesheet" href="static/css/runscript.css">
+<script type="text/javascript" src="static/js/runscript.js"></script>
+{{template "footer"}}

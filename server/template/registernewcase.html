@@ -1,164 +1,101 @@
-{{template "header" .}} 
+{{template "header"}}
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+
 <div class="container">
-	<form class="form-horizontal" role="form" action="registernewcase" method="post">
-		<!--<form class="form-horizontal" role="form" action="registernewcase" method="POST">-->
-		<fieldset>
-			<legend>Case Parameters</legend>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="case_name">Name</label>
-				<div class="col-sm-4">
-					<input class="form-control" id="case_name" name="case_name" type="text" placeholder="OSPF Basic"/>
+	<div class="row">
+		<div class="col-md-4">
+			<!-- begin panel group -->
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+				<!-- panel 1 -->
+				<div class="panel panel-default">
+					<!--wrap panel heading in span to trigger image change as well as collapse -->
+					<span class="side-tab" data-target="#tab1" data-toggle="tab" role="tab" aria-expanded="false">
+						<div class="panel-heading" role="tab" id="headingOne"data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							<h4 class="panel-title">She Sells Seashells</h4>
+						</div>
+					</span>
+
+					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-body">
+							<!-- Tab content goes here -->
+							That fall, as Nadia and Masha got shipped off to prison camps in Siberia, South Brooklyn tried to recover from the storm. My dad and I spent a lot of time in the same apartment engrossed in separate laptops, separate internet missives. He followed Russian news bloggers closely and would update me on troubling developments. A rise in protofascist nationalism
+						</div>
+					</div>
+				</div> 
+				<!-- / panel 1 -->
+
+				<!-- panel 2 -->
+				<div class="panel panel-default">
+					<!--wrap panel heading in span to trigger image change as well as collapse -->
+					<span class="side-tab" data-target="#tab2" data-toggle="tab" role="tab" aria-expanded="false">
+						<div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							<h4 class="panel-title collapsed">TAB 2</h4>
+						</div>
+					</span>
+
+					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						<div class="panel-body">
+							<!-- Tab content goes here -->
+							tab 2 content
+						</div>
+					</div>
 				</div>
-				<label class="col-sm-2 control-label" for="group">Group</label>
-				<div class="col-sm-4">
-					<input class="form-control" id="group" name="group" type="text" placeholder="OSPF"/>
+				<!-- / panel 2 -->
+
+				<!--  panel 3 -->
+				<div class="panel panel-default">
+					<!--wrap panel heading in span to trigger image change as well as collapse -->
+					<span class="side-tab" data-target="#tab3" data-toggle="tab" role="tab" aria-expanded="false">
+						<div class="panel-heading" role="tab" id="headingThree"  class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							<h4 class="panel-title">TAB 3 </h4>
+						</div>
+					</span>
+
+					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+						<div class="panel-body">
+							<!-- tab content goes here -->
+							tab 3 content
+						</div>
+					</div>
 				</div>
-				<label class="col-sm-2 control-label" for="subgroup">Sub Group</label>
-				<div class="col-sm-4">
-					<input class="form-control" id="subgroup" name="subgroup" type="text" placeholder="OSPF"/>
-				</div>
-			</div>
-		</fieldset>     
-		<fieldset>
-			<legend>Tasks</legend>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" for="task_name">Name</label>
-				<div class="col-sm-4">
-					<input class="form-control" id="task_name" name="task_name" type="text" placeholder="OSPF Enable/Disable"/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 col-md-offset-2" >
-					<fieldset>
-						<legend>Routine</legend>
-						<div class="form-group">
-							<label class="col-sm-2 control-label" for="textinput">Name</label>
-							<div class="col-md-4 col-md-offset-2" >
-								<input class="form-control" id="group" name="group" type="text" placeholder="create vlan"/>
+			</div> <!-- / panel-group -->
+
+		</div> <!-- /col-md-4 -->
+
+		<div class="col-md-8">
+			<!-- begin macbook pro mockup -->
+			<div class="md-macbook-pro md-glare">
+				<div class="md-lid">
+					<div class="md-camera"></div>
+					<div class="md-screen">
+						<!-- content goes here -->                
+						<div class="tab-featured-image">
+							<div class="tab-content">
+								<div class="tab-pane  in active" id="tab1">
+									<img src="https://ununsplash.imgix.net/photo-1417024321782-1375735f8987?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950" alt="tab1" class="img img-responsive">
+								</div>
+								<div class="tab-pane " id="tab2">
+
+									<img src="https://unsplash.imgix.net/uploads/1411724908903377d4696/2e9b0cb2?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950">
+
+								</div>
+								<div class="tab-pane fade" id="tab3">
+
+									<img src="https://ununsplash.imgix.net/photo-1422479516648-9b1f0b6e8da8?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950" alt="tab1" class="img img-responsive">
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="routine_description" class="col-sm-2 control-label">Command</label>
-							<div class="container">
-								<div class="row clearfix">
-									<div class="col-md-12 column">
-										<table class="table table-bordered table-hover" id="command_tab">
-											<thead>
-												<tr >
-													<th class="text-center">
-														#
-													</th>
-													<th class="text-center">
-														Mode
-													</th>
-													<th class="text-center">
-														CLI
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr id='command0'>
-													<td>
-														1
-													</td>
-													<td>
-														<input type="text" name='mode0'  placeholder='enable' class="form-control"/>
-													</td>
-													<td>
-														<input type="text" name='cli' placeholder='show runngin-config' class="form-control"/>
-													</td>
-												</tr>
-												<tr id='command1'></tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<a id="add_command" class="pull-left">Add Commnad</a><a id='delete_command' class="pull-right">Delete Command</a>
-							</div>
-						</div><!-- from group-->
-						<div class="form-group">
-							<label for="routine_description" class="col-sm-2 control-label">Assertion</label>
-							<div class="container">
-								<div class="row clearfix">
-									<div class="col-md-12 column">
-										<table class="table table-bordered table-hover" id="assertion_tab">
-											<thead>
-												<tr >
-													<th class="text-center">
-														#
-													</th>
-													<th class="text-center">
-														Mode
-													</th>
-													<th class="text-center">
-														CLI
-													</th>
-													<th class="text-center">
-														Expected
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr id='assert0'>
-													<td>
-														1
-													</td>
-													<td>
-														<input type="text" name='mode0'  placeholder='enable' class="form-control"/>
-													</td>
-													<td>
-														<input type="text" name='cli0' placeholder='show runngin-config' class="form-control"/>
-													</td>
-													<td>
-														<input type="text" name='expected0' placeholder='br1000[[:space:]]+up' class="form-control"/>
-													</td>
-												</tr>
-												<tr id='assert1'></tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<a id="add_assertion" class="pull-left">Add Assertion</a><a id='delete_assertion' class="pull-right">Delete Assertion</a>
-							</div>
-							<div class="form-group">
-								<label for="routine_description" class="col-sm-2 control-label">Description</label>
-								<div class="col-md-4 col-md-offset-2" >
-									<textarea id="routine_description" name="routine_description" class="form-control" rows="5"></textarea>
-								</div>
-							</div>
-
-					</fieldset>
-						</div><!-- /.col-lg-12 -->
-				</div><!-- /.row -->
-
-				<!--
-		<div class="form-group">
-		<label class="col-sm-2 control-label" for="routine_name">Name</label>
-		<div class="col-sm-4">
-		<input class="form-control" id="routine_name" name="routine_name" type="text" placeholder="Create OSPF interface"/>
-		</div>
-		</div>
-				-->
-		</fieldset>
-		<fieldset>
-			<legend>Description</legend>
-			<div class="form-group">
-				<label for="case_description" class="col-sm-2 control-label">Test case description</label>
-				<div class="col-sm-10">
-					<textarea id="case_description" name="case_description" class="form-control" rows="5"></textarea>
+					</div>
 				</div>
-			</div>
-		</fieldset>
-		<fieldset>
-			<legend></legend>
-			<div class="col-sm-4">
-			</div>
-			<div class="col-sm-6 pull-right">
-				<button type="submit" name="submit" class="btn  btn-block center-block">提交</button>
-			</div>
-		</fieldset>
-		</form>
-			</div>
-			<script type="text/javascript" src="static/js/registernewcase.js"></script>
-			<link rel="stylesheet" href="static/css/registernewcase.css">
-			{{template "footer"}}
+				<div class="md-base"></div>
+			</div> <!-- end macbook pro mockup -->
+
+
+
+		</div> <!-- / .col-md-8 -->
+	</div> <!--/ .row -->
+</div> <!-- end sidetab container -->
+<link rel="stylesheet" href="static/css/registernewcase.css">
+{{template "footer"}}

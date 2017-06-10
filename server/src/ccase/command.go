@@ -1,6 +1,9 @@
 package ccase
 
 type Command struct {
-	Mode string
-	Cli  string
+	Delay    string
+	Mode     string
+	Cli      string
+	Expected string
+	Seq      string
 }

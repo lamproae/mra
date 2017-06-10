@@ -1,31 +1,71 @@
 {{template "header" .}} 
-<!-- -->
 <div class="container">
-	<div class="row">
-		<h2>{{.Title}}</h2>
-		<div class="col-md-6">
-			{{with .Pages}}
-			{{range .}}
-			<div class="blockquote-box clearfix">
-				<div class="square pull-left">
-					<img src="http://placehold.it/60/8e44ad/FFF&text=B" alt="" class="" />
+	<div class="row db-padding-btm db-attached">
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<div class="db-wrapper">
+				<div class="db-pricing-eleven db-bk-color-one">
+					<div class="price">
+						<sup></sup>Script
+						<small></small>
+					</div>
+					<div class="type">
+						Run SCript	
+					</div>
+					<div class="pricing-footer">
+						<a href="#" class="btn db-button-color-square btn-lg">GO</a>
+					</div>
 				</div>
-				<h1><a href="{{.Link}}">{{.Link}}</a></h1>
-				<p>{{.Description}}</p>
 			</div>
-			{{else}}
-			<div class="blockquote-box clearfix">
-				<div class="square pull-left">
-					<img src="http://placehold.it/60/8e44ad/FFF&text=B" alt="" class="" />
+		</div>
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<div class="db-wrapper">
+				<div class="db-pricing-eleven db-bk-color-two">
+					<div class="price">
+						<sup></sup>Cases
+						<small></small>
+					</div>
+					<div class="type">
+						Test Cases
+					</div>
+					<div class="pricing-footer">
+						<a href="allcases" class="btn db-button-color-square btn-lg">GO</a>
+					</div>
 				</div>
-				<h1><a href="index">Main</a></h1>
-				<p>No Page Exist</p>
 			</div>
-			{{end}}
-			{{end}}
+		</div>
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<div class="db-wrapper">
+				<div class="db-pricing-eleven db-bk-color-three">
+					<div class="price">
+						<sup></sup>Monitor
+						<small></small>
+					</div>
+					<div class="type">
+						Monitor
+					</div>
+					<div class="pricing-footer">
+						<a href="#" class="btn db-button-color-square btn-lg">GO</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<div class="db-wrapper">
+				<div class="db-pricing-eleven db-bk-color-six">
+					<div class="price">
+						<sup></sup>...
+						<small></small>
+					</div>
+					<div class="type">
+						ToDo...
+					</div>
+					<div class="pricing-footer">
+						<a href="#" class="btn db-button-color-square btn-lg">GO</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-<!-- -->
-<!-- -->
+<link rel="stylesheet" href="static/css/index.css">
 {{template "footer"}}

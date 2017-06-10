@@ -38,40 +38,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := struct {
-		Title string
-		Pages []Page
-	}{
-		Title: "Welcom to ATS System",
-		Pages: []Page{
-			{Link: "/", Description: "Main Page"},
-			{Link: "/bootstrap", Description: "bootstrap test page"},
-			{Link: "/invalid", Description: "Invalid http request page."},
-			{Link: "/notfind", Description: "This should be the 404 page."},
-			{Link: "/inputtest", Description: "This is a page for test html form."},
-			{Link: "/registernewcase", Description: "Register a new ATS case."},
-			{Link: "/index", Description: "This is also the main page."},
-			{Link: "/bootcss", Description: "sample layout from bootcss."},
-			{Link: "/pagefooter", Description: "This is also the main page."},
-			{Link: "/formsubmit", Description: "This is a page for form submit example."},
-			{Link: "/modularcase", Description: "Try to make the test case create page more flexibale."},
-			{Link: "/newcase", Description: "Re-Design the case create function."},
-			{Link: "/precondition", Description: "PreCondition."},
-			{Link: "/postcondition", Description: "PostCondition."},
-			{Link: "/taskroutine", Description: "TaskRoutine."},
-			{Link: "/prepostroutine", Description: "PrePostRoutine."},
-			{Link: "/stepforward", Description: "StepForward."},
-			{Link: "/newnewtask", Description: "NewNewTask."},
-			{Link: "/product", Description: "Connect to a product."},
-			{Link: "/productinfo", Description: "Product information."},
-			{Link: "/bootstraplayout", Description: "Product information."},
-			{Link: "/dashboard", Description: "Dashboard Sample"},
-			{Link: "/newpagenavigator", Description: "NewPageNavigator"},
-			{Link: "/sidebar", Description: "Sidbar Sample"},
-		},
-	}
-
-	err = t.Execute(w, data)
+	err = t.Execute(w, nil)
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -892,10 +859,10 @@ func ProductInfo(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func RunScriptOnDevice(w http.ResponseWriter, r *http.Request) {
+func RunScript(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.Method)
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/runscriptondevice.html", "template/footer.html", "template/header.html")
+		t, err := template.ParseFiles("template/runscript.html", "template/footer.html", "template/header.html")
 		if err != nil {
 			log.Println(err)
 			io.WriteString(w, err.Error())
@@ -911,6 +878,30 @@ func RunScriptOnDevice(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println("Cannot parse form: ", err.Error())
 			return
+		}
+
+		script, err := ccase.RunUserScript(r.Form)
+		if err != nil {
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		t, err := template.ParseFiles("template/dumpscript.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, struct {
+			Title    string
+			Commands []*ccase.Command
+		}{
+			Title:    "Dump Script",
+			Commands: script.Commands,
+		})
+		if err != nil {
+			log.Println(err.Error())
 		}
 
 		log.Println(r.Form)
@@ -1095,6 +1086,38 @@ func Product(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Login(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/product.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	} else if r.Method == "POST" {
+		t, err := template.ParseFiles("template/product.html", "template/footer.html", "template/header.html")
+		if err != nil {
+			log.Println(err)
+			io.WriteString(w, err.Error())
+			return
+		}
+
+		err = t.Execute(w, nil)
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+	} else {
+		http.Redirect(w, r, "/invalid", http.StatusTemporaryRedirect)
+	}
+}
+
 func ResourceNotFoundHandler(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -1128,7 +1151,7 @@ func main() {
 	http.HandleFunc("/productinfo", ProductInfo)
 	http.HandleFunc("/allcases", DeviceTestCases)
 	http.HandleFunc("/devicestatus", DumpDeviceCurrentStatus)
-	http.HandleFunc("/runscript", RunScriptOnDevice)
+	http.HandleFunc("/runscript", RunScript)
 	http.HandleFunc("/bootstraplayout", BootstrapLayout)
 	http.HandleFunc("/dashboard", Dashboard)
 	http.HandleFunc("/sidebar", SideBar)
@@ -1136,6 +1159,7 @@ func main() {
 	http.HandleFunc("/deletetask", DeleteTask)
 	http.HandleFunc("/dumptask", DumpTask)
 	http.HandleFunc("/edittask", EditTask)
+	http.HandleFunc("/login", Login)
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.ListenAndServe(":8080", nil)
 }

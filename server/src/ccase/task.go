@@ -19,6 +19,7 @@ type Task struct {
 	PostCondition *Condition
 	Clear         *Routine
 	Description   string
+	Seq           int
 }
 
 func IsTaskParamsValid(in url.Values) bool {
